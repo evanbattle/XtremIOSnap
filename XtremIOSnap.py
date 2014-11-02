@@ -42,15 +42,15 @@ parser = argparse.ArgumentParser(
 
             -Take a snapshot on the XtremIO using an ecoded username and password:
 
-                xtremio.py -host [hostname or IP of XtremIO cluster] -ux [EncodedUname] -px [EncodedPassword] -vol [LUNName] -n [number of snaps to keep] -f [Folder]
+                xtremiosnap.py -host [hostname or IP of XtremIO cluster] -ux [EncodedUname] -px [EncodedPassword] -vol [LUNName] -n [number of snaps to keep] -f [Folder]
 
             -Generate the encoded username and password:
 
-                xtremio.py -e -up [PlainText Uname] -pp [PlainText Password]
+                xtremiosnap.py -e -up [PlainText Uname] -pp [PlainText Password]
 
             -Take a snapshot on the XtremIO using plain text username and password:
 
-                xtremio.py -host [hostname or IP of XtremIO cluster] -up [PlainTextUsername] -pp [PlainTextPassword] - vol [LUNName]
+                xtremiosnap.py -host [hostname or IP of XtremIO cluster] -up [PlainTextUsername] -pp [PlainTextPassword] - vol [LUNName]
 
         If the -n option is not used, the script will maintain a maximum of 5 snapshots, deleting snaps on a FIFO basis.
 
