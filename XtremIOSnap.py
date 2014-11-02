@@ -374,6 +374,10 @@ def def_XMSGetRequest(
         verify=False
         )
     getrequest_logger.info ('Get Request Status: '+str(resp))
+    if str(resp) == '<Response [401]>':
+        getrequest_logger.info( 'Unsuccessful response received: '+resp.json()['message']+' - exiting.')
+        getrequest_logger.error( 'Unsuccessful response received: '+resp.json()['message']+' - exiting.')
+        sys.exit(1)
     data = resp.json()[JSON_KEY]
     return data
 
