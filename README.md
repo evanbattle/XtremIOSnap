@@ -2,6 +2,10 @@ XtremIOSnap
 ===========
    ------------------------------------------------------------------------
     XTREMIOSNAP
+    This example code is unsupported by both EMC and the author.
+    IF YOU HAVE PROBLEMS WITH THIS SOFTWARE, THERE IS NO ONE PROVIDING TECHNICAL SUPPORT FOR RESOLVING ISSUES. USE CODE AS IS!
+    
+    THIS GITHUB REPOSITORY IS NOT AFFILIATED WITH EMC CORPORATION.
    
    Version 1.0
   
