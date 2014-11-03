@@ -289,12 +289,25 @@ def def_XMSGetSnapDetails(
     getsnapdetails_logger = def_FuncLogger(logging.DEBUG,logging.INFO)
     getsnapdetails_logger.debug('Starting def_XMSGetSnapDetails module')
 
-    resp = requests.get(
-        'https://'+XMS_IP+'/api/json/types/snapshots/?name='+XMS_SNAPNAME,
-        auth=HTTPBasicAuth(XMS_USERID,XMS_PASSWORD),
-        verify=False
-        )
-    getsnapdetails_logger.info('Response received from XMS for GetSnapDetails: '+str(resp))
+    try:
+        resp = requests.get(
+            'https://'+XMS_IP+'/api/json/types/snapshots/?name='+XMS_SNAPNAME,
+            auth=HTTPBasicAuth(XMS_USERID,XMS_PASSWORD),
+            verify=False
+            )
+    except requests.exceptions.RequestException as e:
+        getsnapdetails_logger.info(e)
+        getsnapdetails_logger.error(e)
+        sys.exit(1)
+
+    if resp.status_code == 200:
+        getsnapdetails_logger.info('Response code received from XMS for GetSnapDetails: <'+str(resp.status_code)+'>')
+        getsnapdetails_logger.debug(resp.text)
+        getsnapdetails_logger.info('Snap details successfully retrieved.')
+    else:
+        getsnapdetails_logger.info('Response code received from XMS for GetSnapDetails: <'+str(resp.status_code)+'>')
+        getsnapdetails_logger.info(resp.text)
+
     arr_ancestor_vol_id = []
     arr_ancestor_vol_id = resp.json()['content']['ancestor-vol-id']
     data_ancestor_vol_id_name = arr_ancestor_vol_id[1]
@@ -318,19 +331,36 @@ def def_CreateXMSSnap(
     createsnap_logger = def_FuncLogger(logging.DEBUG,logging.INFO)
     createsnap_logger.debug('Starting def_CreateXMSSnap module')
 
-    payload = '{"ancestor-vol-id": \"'+XMS_SRC_VOL+'\" , "snap-vol-name": \"'+XMS_TGT_VOL+'\" ,"folder-id": \"/'+XMS_FOLDER+'\" }'
+    payload = '{\
+        "ancestor-vol-id": \"'+XMS_SRC_VOL+'\" , \
+        "snap-vol-name": \"'+XMS_TGT_VOL+'\" ,\
+        "folder-id": \"/'+XMS_FOLDER+'\" \
+        }'
+
     j=json.loads(payload)
 
     createsnap_logger.debug('JSON dumps: '+json.dumps(j))
 
-    resp = requests.post(
-        'https://'+XMS_IP+'/api/json/'+XMS_URL,
-        auth=HTTPBasicAuth(XMS_USERID,XMS_PASSWORD),
-        verify=False,
-        json=j
-        )
-    createsnap_logger.debug('Payload: '+payload)
-    createsnap_logger.info('Create Snap Status: '+str(resp))
+    try:
+        resp = requests.post(
+            'https://'+XMS_IP+'/api/json/'+XMS_URL,
+            auth=HTTPBasicAuth(XMS_USERID,XMS_PASSWORD),
+            verify=False,
+            json=j
+            )
+    except requests.exceptions.RequestException as e:
+        createsnap_logger.info(e)
+        createsnap_logger.error(e)
+        sys.exit(1)
+
+    createsnap_logger.debug('Payload: '+json.dumps(payload))
+    if resp.status_code == 201:
+        createsnap_logger.info('Create Snap Status: <'+str(resp.status_code)+'>')
+        createsnap_logger.debug(resp.text)
+    else:
+        createsnap_logger.info('Create Snap Status: <'+str(resp.status_code)+'>')
+        createsnap_logger.info(resp.text)
+
     return resp
 
 def def_CreateXMSFolder(
@@ -344,17 +374,34 @@ def def_CreateXMSFolder(
     createfolder_logger = def_FuncLogger(logging.DEBUG,logging.INFO)
     createfolder_logger.debug('Starting def_CreateXMSFolder module')
 
-    payload = '{"caption": \"'+XMS_FOLDER+'\" , "parent-folder-id": \"/'+XMS_PARENTFOLDER+'\" }'
+    payload = '{\
+        "caption": \"'+XMS_FOLDER+'\" , \
+        "parent-folder-id": \"/'+XMS_PARENTFOLDER+'\" \
+        }'
     j=json.loads(payload)
     createfolder_logger.debug('JSON dumps: '+json.dumps(j))
-    resp = requests.post(
-        'https://'+XMS_IP+'/api/json/types/volume-folders',
-        auth=HTTPBasicAuth(XMS_USERID,XMS_PASSWORD),
-        verify=False,
-        json=j
-        )
+
+    try:
+        resp = requests.post(
+            'https://'+XMS_IP+'/api/json/types/volume-folders',
+            auth=HTTPBasicAuth(XMS_USERID,XMS_PASSWORD),
+            verify=False,
+            json=j
+            )
+    except requests.exceptions.RequestException as e:
+        createfolder_logger.info(e)
+        createfolder_logger.error(e)
+        sys.exit(1)
+
     createfolder_logger.debug('Payload: '+payload)
-    createfolder_logger.info('Create Folder Status: '+str(resp))
+
+    if resp.status_code == 201:
+        createfolder_logger.info('Create Folder Status: <'+str(resp.status_code)+'>')
+        createfolder_logger.debug(resp.text)
+    else:
+        createfolder_logger.info('Create Folder Status: <'+str(resp.status_code)+'>')
+        createfolder_logger.info(resp.text)
+
     return resp
 
 def def_XMSGetRequest(
@@ -368,16 +415,25 @@ def def_XMSGetRequest(
     getrequest_logger = def_FuncLogger(logging.DEBUG,logging.INFO)
     getrequest_logger.debug('Starting XMSGetRequest Module')
 
-    resp = requests.get(
-        'https://'+XMS_IP+'/api/json/'+XMS_URL,
-        auth=HTTPBasicAuth(XMS_USERID,XMS_PASSWORD),
-        verify=False
-        )
-    getrequest_logger.info ('Get Request Status: '+str(resp))
-    if str(resp) == '<Response [401]>':
-        getrequest_logger.info( 'Unsuccessful response received: '+resp.json()['message']+' - exiting.')
-        getrequest_logger.error( 'Unsuccessful response received: '+resp.json()['message']+' - exiting.')
+    try:
+        resp = requests.get(
+            'https://'+XMS_IP+'/api/json/'+XMS_URL,
+            auth=HTTPBasicAuth(XMS_USERID,XMS_PASSWORD),
+            verify=False
+            )
+    except requests.exceptions.RequestException as e:
+        getrequest_logger.info(e)
+        getrequest_logger.error(e)
         sys.exit(1)
+
+    if resp.status_code == 200:
+        getrequest_logger.info('Get Request Status: <'+str(resp.status_code)+'>')
+        getrequest_logger.debug(resp.text)
+    else:
+        getrequest_logger.info('Get Request Status: <'+str(resp.status_code)+'>')
+        getrequest_logger.info(resp.text)
+        sys.exit(1)
+
     data = resp.json()[JSON_KEY]
     return data
 
@@ -391,12 +447,25 @@ def def_GetSnapList(
     getsnaplist_logger.debug('Starting GetSnapList Module')
 
     getsnaplist_logger.info('Getting the list of snaps for '+XMS_VOLUME)
-    resp = requests.get(
-        'https://'+XMS_IP+'/api/json/types/volumes/?name='+XMS_VOLUME,
-        auth=HTTPBasicAuth(XMS_USERID,XMS_PASSWORD),
-        verify=False
-        )
-    getsnaplist_logger.info('Get Snap List Response: '+str(resp))
+
+    try:
+        resp = requests.get(
+            'https://'+XMS_IP+'/api/json/types/volumes/?name='+XMS_VOLUME,
+            auth=HTTPBasicAuth(XMS_USERID,XMS_PASSWORD),
+            verify=False
+            )
+    except requests.exceptions.RequestException as e:
+        getsnaplist_logger.info(e)
+        getsnaplist_logger.error(e)
+        sys.exit(1)
+
+    if resp.status_code == 200:
+        getsnaplist_logger.info('Get Snap List Status: <'+str(resp.status_code)+'>')
+        getsnaplist_logger.debug(resp.text)
+    else:
+        getsnaplist_logger.info('Get Snap List Status: <'+str(resp.status_code)+'>')
+        getsnaplist_logger.info(resp.text)
+        sys.exit(1)
 
     arr_snap_list = []
     arr_snap_list = resp.json()['content']['dest-snap-list']
@@ -413,11 +482,25 @@ def def_DeleteSnap(
     deletesnap_logger.debug('Starting SeleteSnap Module')
 
     deletesnap_logger.info('Deleting Snapshot: '+XMS_VOLUME)
-    resp = requests.delete(
-        'https://'+XMS_IP+'/api/json/types/volumes/?name='+XMS_VOLUME,
-        auth=HTTPBasicAuth(XMS_USERID,XMS_PASSWORD),
-        verify=False
-        )
+    try:
+        resp = requests.delete(
+            'https://'+XMS_IP+'/api/json/types/volumes/?name='+XMS_VOLUME,
+            auth=HTTPBasicAuth(XMS_USERID,XMS_PASSWORD),
+            verify=False
+            )
+    except requests.exceptions.RequestException as e:
+        deletesnap_logger.info(e)
+        deletesnap_logger.error(e)
+        sys.exit(1)
+
+    if resp.status_code == 200:
+        deletesnap_logger.info('Delete Snap Status: <'+str(resp.status_code)+'>')
+        deletesnap_logger.debug(resp.text)
+    else:
+        deletesnap_logger.info('Delete Snap Status: <'+str(resp.status_code)+'>')
+        deletesnap_logger.info(resp.text)
+        sys.exit(1)
+
     return resp
 
 def def_FuncLogger(file_level,console_level=None):
