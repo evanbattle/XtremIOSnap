@@ -770,7 +770,7 @@ def def_FuncLogger(file_level,console_level=None):
     try:
         fh = logging.FileHandler(args.var_Logfile.format(function_name))
     except IOError as e:
-        print 'Logging IOError: ['+e.errno+'] - '+e.strerror
+        print 'Logging IOError: ['+str(e.errno)+'] - '+e.strerror
         print 'Use the -l LogPath option'
         sys.exit(1)
 
