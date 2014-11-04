@@ -767,8 +767,11 @@ def def_FuncLogger(file_level,console_level=None):
         ch_format = logging.Formatter('%(asctime)s - %(levelname)s - %(message)s')
         ch.setFormatter(ch_format)
         logger.addHandler(ch)
+    try:
+        fh = logging.FileHandler(args.var_Logfile.format(function_name))
+    except IOError as e:
+        print e
 
-    fh = logging.FileHandler(args.var_Logfile.format(function_name))
     fh.setLevel(file_level)
     fh_format = logging.Formatter('%(asctime)s - %(lineno)d - %(levelname)8s - %(message)s')
     fh.setFormatter(fh_format)
