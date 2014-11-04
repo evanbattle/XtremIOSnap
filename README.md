@@ -17,6 +17,8 @@ XtremIOSnap
    
       pip install requests
     
+   To run in Linux or MacOS, make sure to use the -l [Logfile] option.  The script have been tested back to python 2.6 on both Linux (Ubuntu 14.04) and Mac OSX Mavericks.
+   
    The most common usage scenarios:
 
    -Take a snapshot on the XtremIO using an ecoded username and password:
