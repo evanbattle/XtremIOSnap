@@ -12,6 +12,9 @@ XtremIOSnap
     
    Create and maintain snapshots on an XtremIO array utilizing the REST API interface.  Designed and tested for v3.0.
    Visual C++ 2008 Redistributable package from MS (http://www.microsoft.com/en-us/download/details.aspx?id=29 ) is required for the compiled Windows executable.
+   
+   If you are running this in python, it was written against Python 2.7.8 and will require the requests package to be installed using:
+      pip install requests
     
    The most common usage scenarios:
 
