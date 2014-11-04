@@ -204,10 +204,9 @@ def main():
         main_logger.info('Password hash is '+base64.b64encode(args.plain_XMS_PASSWORD))
         main_logger.info('Use the hash vaues as the User ID and Password when using the -ux and -px switches.')
         sys.exit(0)
-    print 'HERE'
+
     if args.var_weekly == True:
         if args.num_snaps_to_retain == None:
-            print 'WEEKLY'
             main_logger.info('Using the WEEKLY option')
             num_snaps_to_retain = 1
         else:
@@ -215,7 +214,6 @@ def main():
         newsnapsuffix = '.weekly.'
     elif args.var_daily == True:
         if args.num_snaps_to_retain == None:
-            print 'DAILY'
             main_logger.info('Using the DAILY option')
             num_snaps_to_retain = 5
         else:
@@ -223,7 +221,6 @@ def main():
         newsnapsuffix = '.daily.'
     elif args.var_hourly == True:
         if args.num_snaps_to_retain == None:
-            print 'HOURLY'
             main_logger.info('Using the HOURLY option')
             num_snaps_to_retain = 5
         else:
