@@ -770,7 +770,7 @@ def def_FuncLogger(file_level,console_level=None):
     try:
         fh = logging.FileHandler(args.var_Logfile.format(function_name))
     except IOError as e:
-        print e.message()
+        print e.message
         sys.exit(1)
 
     fh.setLevel(file_level)
