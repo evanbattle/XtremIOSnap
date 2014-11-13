@@ -8,7 +8,7 @@ XtremIOSnap
     
    THIS GITHUB REPOSITORY IS NOT AFFILIATED WITH EMC CORPORATION.
 
-   Version 2.0
+   Version 2.5
     
    Create and maintain snapshots on an XtremIO array utilizing the REST API interface.  Designed and tested for v3.0.
    Visual C++ 2008 Redistributable package from MS (http://www.microsoft.com/en-us/download/details.aspx?id=29 ) is required for the compiled Windows executable.
