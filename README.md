@@ -24,6 +24,8 @@ XtremIOSnap
    -Take a snapshot on the XtremIO using an ecoded username and password:
 
       xtremiosnap.py -host [hostname or IP of XtremIO cluster] -ux [EncodedUname] -px [EncodedPassword] -vol [LUNName] -n [number of snaps to keep] -[hourly/daily/weekly] -f [Folder]
+      
+      xtremiosnap.py -host [hostname or IP of XtremIO cluster] -ux [EncodedUname] -px [EncodedPassword] -fol [FolderName] -n [number of snaps to keep] -[hourly/daily/weekly] -f [Folder]
 
    -Generate the encoded username and password:
 
