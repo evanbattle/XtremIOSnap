@@ -255,6 +255,7 @@ def main():
     bool_create_folder = True ## will change to False if the /_Snapshots folder already exists
 
     if var_snap_tgt_folder == None:
+        var_snap_tgt_folder =''
         snap_tgt_folder = SnapFolder
     else:
         snap_tgt_folder = var_snap_tgt_folder+'/'+SnapFolder
@@ -594,7 +595,7 @@ def def_CreateXMSFolder(
 
     createfolder_logger = def_FuncLogger(logging.DEBUG,logging.INFO)
     createfolder_logger.debug('Starting def_CreateXMSFolder module')
-
+    createfolder_logger.debug(XMS_PARENTFOLDER)
     payload = '{\
         "caption": \"'+XMS_FOLDER+'\" , \
         "parent-folder-id": \"/'+XMS_PARENTFOLDER+'\" \
