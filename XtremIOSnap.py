@@ -61,6 +61,10 @@ parser = argparse.ArgumentParser(
 [EncodedUname] -px [EncodedPassword] -vol [LUNName] -n \
 [number of snaps to keep] -[hourly/daily/weekly] -f [Folder]
 
+                xtremiosnap.py -host [hostname or IP of XtremIO cluster] -ux \
+[EncodedUname] -px [EncodedPassword] -fol [FolderName] -n \
+[number of snaps to keep] -[hourly/daily/weekly]
+
             -Generate the encoded username and password:
 
                 xtremiosnap.py -e -up [PlainText Uname] -pp [PlainText Password]
@@ -138,6 +142,11 @@ parser.add_argument(
     help='The name of the LUN to be snapshotted'
     )
 parser.add_argument(
+    '-fol','--foldersnap',
+    dest='snap_src_fol',
+    help='The name of the Folder to be snapshotted'
+    )
+parser.add_argument(
     '-n','--numsnaps',
     dest='num_snaps_to_retain',
     help='Overrides the default number of snaps to retain of 5.'
@@ -205,31 +214,41 @@ def main():
         main_logger.info('Use the hash vaues as the User ID and Password when using the -ux and -px switches.')
         sys.exit(0)
 
+    if args.snap_src_fol == None:
+        foldersuffix = ''
+        src_folder = None
+    else:
+        foldersuffix = '.folder'
+        src_folder = args.snap_src_fol
+
     if args.var_weekly == True:
         if args.num_snaps_to_retain == None:
             main_logger.info('Using the WEEKLY option')
             num_snaps_to_retain = 1
         else:
             num_snaps_to_retain = args.num_snaps_to_retain
-        newsnapsuffix = '.weekly.'
+        newsnapsuffix = foldersuffix+'.weekly.'
     elif args.var_daily == True:
         if args.num_snaps_to_retain == None:
             main_logger.info('Using the DAILY option')
             num_snaps_to_retain = 5
         else:
             num_snaps_to_retain = args.num_snaps_to_retain
-        newsnapsuffix = '.daily.'
+        newsnapsuffix = foldersuffix+'.daily.'
     elif args.var_hourly == True:
         if args.num_snaps_to_retain == None:
             main_logger.info('Using the HOURLY option')
             num_snaps_to_retain = 5
         else:
             num_snaps_to_retain = args.num_snaps_to_retain
-        newsnapsuffix = '.hourly.'
+        newsnapsuffix = foldersuffix+'.hourly.'
     else:
         main_logger.info('No hourly, daily, or weekly option specifed. Exiting.')
         sys.exit(1)
     main_logger.info('Using the '+newsnapsuffix+' option')
+
+
+
 
     XMS_IP = args.XMS_IP
     main_logger.info('Target XMS system is - '+XMS_IP)
@@ -241,13 +260,16 @@ def main():
         args.encoded_XMS_PASSWORD
         )
 
-    if args.snap_src == None:
-        main_logger.info('No volume specified.  Exiting.')
-        main_logger.error('NO VOLUME SPECIFIED')
-        sys.exit(1)
-    else:
-        snap_src = args.snap_src
-        main_logger.info('Volume selected to snapshot = '+snap_src)
+    if src_folder == None:
+        if args.snap_src == None:
+            main_logger.info('No volume specified.  Exiting.')
+            main_logger.error('NO VOLUME SPECIFIED')
+            sys.exit(1)
+        else:
+            snap_src = args.snap_src
+            main_logger.info('Volume selected to snapshot = '+snap_src)
+
+
 
     SnapFolder = '_Snapshots'
 
@@ -285,87 +307,188 @@ def main():
 
     main_logger.info('Using '+snap_tgt_folder+' for snapshots')
 
-    main_logger.info('Will retain '+str(num_snaps_to_retain)+' snapshots for volume: '+snap_src)
+    if src_folder == None:
+        main_logger.info('Will retain '+str(num_snaps_to_retain)+' snapshots for volume: '+snap_src)
 
-    timestamp = datetime.datetime.now()
-    timestamp = timestamp.isoformat()
-    arr_timestamp = timestamp.split('.',2) ##<--stripping the microseconds from the timestamp for aesthetics
+        vol_snap_list = def_GetSnapList(XMS_IP,XMS_USERID,XMS_PASSWORD,snap_src)##<--Initial list of snapshots
 
-    newsnap = snap_src+'_'+arr_timestamp[0]+newsnapsuffix+'0'##<--sets the newly created snapshot to always be .0
+        arr_vol_snap_list_component = []
+        for vol_snap_list_rs in vol_snap_list:
+            if newsnapsuffix in vol_snap_list_rs[1]:
+                arr_vol_snap_list_component.append(vol_snap_list_rs[1])
 
-    vol_snap_list = def_GetSnapList(XMS_IP,XMS_USERID,XMS_PASSWORD,snap_src)##<--Initial list of snapshots
-
-    arr_vol_snap_list_component = []
-    for vol_snap_list_rs in vol_snap_list:
-        if newsnapsuffix in vol_snap_list_rs[1]:
-            arr_vol_snap_list_component.append(vol_snap_list_rs[1])
-
-    arr_vol_snap_list_component.sort(reverse=True)
-    for y in range(len(arr_vol_snap_list_component)): ##<--shifting the suffix of each matchin snap by 1
-        if newsnapsuffix in arr_vol_snap_list_component[y]:
-            list_snapname = []
-            try:
-                list_snapname = arr_vol_snap_list_component[y].split('.',3)
-            except:
+        arr_vol_snap_list_component.sort(reverse=True)
+        for y in range(len(arr_vol_snap_list_component)): ##<--shifting the suffix of each matchin snap by 1
+            if newsnapsuffix in arr_vol_snap_list_component[y]:
+                list_snapname = []
+                try:
+                    list_snapname = arr_vol_snap_list_component[y].split('.',3)
+                except:
+                    pass
+                rename_to =list_snapname[0]+newsnapsuffix+str(y+1)
+                renamestatus = def_RenameSnap(
+                    XMS_IP,
+                    XMS_USERID,
+                    XMS_PASSWORD,
+                    arr_vol_snap_list_component[y],
+                    rename_to
+                    )
+    else:
+        folder_vol_list = def_GetVolList(XMS_IP,XMS_USERID,XMS_PASSWORD,src_folder)
+        arr_folder_vol_list_component = []
+        for folder_vol_list_rs in folder_vol_list:
+            if '/_Snapshots' in folder_vol_list_rs[1]:
                 pass
-            rename_to =list_snapname[0]+newsnapsuffix+str(y+1)
-            renamestatus = def_RenameSnap(
-                XMS_IP,
-                XMS_USERID,
-                XMS_PASSWORD,
-                arr_vol_snap_list_component[y],
-                rename_to
-                )
-
-    vol_snap = def_CreateXMSSnap(
-        XMS_IP,
-        XMS_USERID,
-        XMS_PASSWORD,
-        'types/snapshots',
-        snap_src,
-        newsnap,
-        snap_tgt_folder
-        )
-
-    vol_snap_list = def_GetSnapList(XMS_IP,XMS_USERID,XMS_PASSWORD,snap_src)##<--Refresh the snap list
-
-    arr_vol_snap_list_component = []
-    for vol_snap_list_rs in vol_snap_list:
-        if newsnapsuffix in vol_snap_list_rs[1]:
-            arr_vol_snap_list_component.append(vol_snap_list_rs[1])
-
-    arr_vol_snap_list_component.sort(reverse=False)
-
-    for x in xrange(len(arr_vol_snap_list_component)-(int(num_snaps_to_retain))):
-        if newsnapsuffix in arr_vol_snap_list_component[x]:
-            main_logger.info(str(x)+': '+ arr_vol_snap_list_component[x])
-            snap_parent_name, snap_creation_time, snap_space_consumed, arr_snap_lun_mapping = def_XMSGetSnapDetails(
-                XMS_IP,
-                XMS_USERID,
-                XMS_PASSWORD,
-                arr_vol_snap_list_component[x]
-                )
-            main_logger.info('Parent Volume of '+arr_vol_snap_list_component[x]+' = '+snap_parent_name)
-            main_logger.info('Snap was created on '+snap_creation_time)
-            main_logger.info('Snap is using '+ str((float(snap_space_consumed)/1024)/1024)+' GB')
-
-            arr_lun_mapping_component = []
-
-            if len(arr_snap_lun_mapping) > 0:##<--checking to see if an active LUN mapping exists
-                for rs in arr_snap_lun_mapping:
-                    arr_lun_mapping_component = [[y] for y in rs[0]]
-                    arr_lun_mapping_component =str(arr_lun_mapping_component[1])
-                    arr_lun_mapping_component = arr_lun_mapping_component.replace('[u\'','')
-                    arr_lun_mapping_component = arr_lun_mapping_component.replace('\']','')
-                    main_logger.info('Snapshot '+arr_vol_snap_list_component[x]+' is currently mapped to '+arr_lun_mapping_component+', it will not be deleted.')
             else:
-                main_logger.info('No hosts mapped to '+arr_vol_snap_list_component[x]+', it will be deleted.')
-                delete_status = def_DeleteSnap(
+                arr_folder_vol_list_component.append(folder_vol_list_rs[1])
+                main_logger.info('Will retain '+str(num_snaps_to_retain)+' snapshots for volume: '+folder_vol_list_rs [1])
+
+                vol_snap_list = def_GetSnapList(XMS_IP,XMS_USERID,XMS_PASSWORD,folder_vol_list_rs [1])##<--Initial list of snapshots
+
+                arr_vol_snap_list_component = []
+                for vol_snap_list_rs in vol_snap_list:
+                    if newsnapsuffix in vol_snap_list_rs[1]:
+                        arr_vol_snap_list_component.append(vol_snap_list_rs[1])
+
+                arr_vol_snap_list_component.sort(reverse=True)
+                for y in range(len(arr_vol_snap_list_component)): ##<--shifting the suffix of each matchin snap by 1
+                    if newsnapsuffix in arr_vol_snap_list_component[y]:
+                        list_snapname = []
+                        try:
+                            list_snapname = arr_vol_snap_list_component[y].split('.',3)
+                        except:
+                            pass
+                        rename_to =list_snapname[0]+newsnapsuffix+str(y+1)
+                        renamestatus = def_RenameSnap(
+                            XMS_IP,
+                            XMS_USERID,
+                            XMS_PASSWORD,
+                            arr_vol_snap_list_component[y],
+                            rename_to
+                            )
+
+
+    if src_folder == None:
+        timestamp = datetime.datetime.now()
+        timestamp = timestamp.isoformat()
+        arr_timestamp = timestamp.split('.',2) ##<--stripping the microseconds from the timestamp for aesthetics
+
+        fullsuffix = '_'+arr_timestamp[0]+newsnapsuffix
+        newsnap = snap_src+fullsuffix+'0'##<--sets the newly created snapshot to always be .0
+
+        vol_snap = def_CreateXMSSnap(
+            XMS_IP,
+            XMS_USERID,
+            XMS_PASSWORD,
+            'types/snapshots',
+            snap_src,
+            newsnap,
+            snap_tgt_folder
+            )
+    else:
+        timestamp = datetime.datetime.now()
+        timestamp = timestamp.isoformat()
+        arr_timestamp = timestamp.split('.',2) ##<--stripping the microseconds from the timestamp for aesthetics
+
+        fullsuffix = '_'+arr_timestamp[0]+newsnapsuffix+'0'
+
+        vol_snap = def_CreateXMSFolderSnap(
+            XMS_IP,
+            XMS_USERID,
+            XMS_PASSWORD,
+            'types/snapshots',
+            src_folder,
+            fullsuffix,
+            snap_tgt_folder
+            )
+
+
+    if src_folder == None:
+        vol_snap_list = def_GetSnapList(XMS_IP,XMS_USERID,XMS_PASSWORD,snap_src)##<--Refresh the snap list
+
+        arr_vol_snap_list_component = []
+        for vol_snap_list_rs in vol_snap_list:
+            if newsnapsuffix in vol_snap_list_rs[1]:
+                arr_vol_snap_list_component.append(vol_snap_list_rs[1])
+
+        arr_vol_snap_list_component.sort(reverse=False)
+
+        for x in xrange(len(arr_vol_snap_list_component)-(int(num_snaps_to_retain))):
+            if newsnapsuffix in arr_vol_snap_list_component[x]:
+                main_logger.info(str(x)+': '+ arr_vol_snap_list_component[x])
+                snap_parent_name, snap_creation_time, snap_space_consumed, arr_snap_lun_mapping = def_XMSGetSnapDetails(
                     XMS_IP,
                     XMS_USERID,
                     XMS_PASSWORD,
                     arr_vol_snap_list_component[x]
                     )
+                main_logger.info('Parent Volume of '+arr_vol_snap_list_component[x]+' = '+snap_parent_name)
+                main_logger.info('Snap was created on '+snap_creation_time)
+                main_logger.info('Snap is using '+ str((float(snap_space_consumed)/1024)/1024)+' GB')
+
+                arr_lun_mapping_component = []
+
+                if len(arr_snap_lun_mapping) > 0:##<--checking to see if an active LUN mapping exists
+                    for rs in arr_snap_lun_mapping:
+                        arr_lun_mapping_component = [[y] for y in rs[0]]
+                        arr_lun_mapping_component =str(arr_lun_mapping_component[1])
+                        arr_lun_mapping_component = arr_lun_mapping_component.replace('[u\'','')
+                        arr_lun_mapping_component = arr_lun_mapping_component.replace('\']','')
+                        main_logger.info('Snapshot '+arr_vol_snap_list_component[x]+' is currently mapped to '+arr_lun_mapping_component+', it will not be deleted.')
+                else:
+                    main_logger.info('No hosts mapped to '+arr_vol_snap_list_component[x]+', it will be deleted.')
+                    delete_status = def_DeleteSnap(
+                        XMS_IP,
+                        XMS_USERID,
+                        XMS_PASSWORD,
+                        arr_vol_snap_list_component[x]
+                        )
+    else:
+        folder_vol_list = def_GetVolList(XMS_IP,XMS_USERID,XMS_PASSWORD,src_folder)
+        arr_folder_vol_list_component = []
+        for folder_vol_list_rs in folder_vol_list:
+            if '/_Snapshots' in folder_vol_list_rs[1]:
+                pass
+            else:
+                vol_snap_list = def_GetSnapList(XMS_IP,XMS_USERID,XMS_PASSWORD,folder_vol_list_rs[1])##<--Refresh the snap list
+
+                arr_vol_snap_list_component = []
+                for vol_snap_list_rs in vol_snap_list:
+                    if newsnapsuffix in vol_snap_list_rs[1]:
+                        arr_vol_snap_list_component.append(vol_snap_list_rs[1])
+
+                arr_vol_snap_list_component.sort(reverse=False)
+
+                for x in xrange(len(arr_vol_snap_list_component)-(int(num_snaps_to_retain))):
+                    if newsnapsuffix in arr_vol_snap_list_component[x]:
+                        main_logger.info(str(x)+': '+ arr_vol_snap_list_component[x])
+                        snap_parent_name, snap_creation_time, snap_space_consumed, arr_snap_lun_mapping = def_XMSGetSnapDetails(
+                            XMS_IP,
+                            XMS_USERID,
+                            XMS_PASSWORD,
+                            arr_vol_snap_list_component[x]
+                            )
+                        main_logger.info('Parent Volume of '+arr_vol_snap_list_component[x]+' = '+snap_parent_name)
+                        main_logger.info('Snap was created on '+snap_creation_time)
+                        main_logger.info('Snap is using '+ str((float(snap_space_consumed)/1024)/1024)+' GB')
+
+                        arr_lun_mapping_component = []
+
+                        if len(arr_snap_lun_mapping) > 0:##<--checking to see if an active LUN mapping exists
+                            for rs in arr_snap_lun_mapping:
+                                arr_lun_mapping_component = [[y] for y in rs[0]]
+                                arr_lun_mapping_component =str(arr_lun_mapping_component[1])
+                                arr_lun_mapping_component = arr_lun_mapping_component.replace('[u\'','')
+                                arr_lun_mapping_component = arr_lun_mapping_component.replace('\']','')
+                                main_logger.info('Snapshot '+arr_vol_snap_list_component[x]+' is currently mapped to '+arr_lun_mapping_component+', it will not be deleted.')
+                        else:
+                            main_logger.info('No hosts mapped to '+arr_vol_snap_list_component[x]+', it will be deleted.')
+                            delete_status = def_DeleteSnap(
+                                XMS_IP,
+                                XMS_USERID,
+                                XMS_PASSWORD,
+                                arr_vol_snap_list_component[x]
+                                )
 
     main_logger.info('Complete!')
 
@@ -387,7 +510,7 @@ def def_RenameSnap(
     ):
 
     renamesnap_logger = def_FuncLogger(logging.DEBUG,logging.INFO)
-    renamesnap_logger.debug('Starting def_CreateXMSSnap module')
+    renamesnap_logger.debug('Starting def_RenameSnap module')
 
     payload = '{"vol-name": \"'+XMS_NEWSNAP+'\"}'
 
@@ -579,6 +702,61 @@ def def_CreateXMSSnap(
     return resp
 
 ##%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+##  def_CreateXMSFolderSNAP
+##
+##  Takes a URL (XMS_URL) for types/volumes(this can be hardcoded, maybe i'll
+##  change it in a future version), a source Folder name (XMS_SRC_FOLDER), a
+##  target suffix (XMS_TGT_SUFFIX), and a target folder (XMS_TGT_FOLDER) and
+##  creates a snapshot in the specified folder.  This only returns the HTTP
+##  response code.
+##%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+def def_CreateXMSFolderSnap(
+    XMS_IP,
+    XMS_USERID,
+    XMS_PASSWORD,
+    XMS_URL,
+    XMS_SRC_FOLDER,
+    XMS_TGT_SUFFIX,
+    XMS_TGT_FOLDER
+    ):
+
+    createfoldersnap_logger = def_FuncLogger(logging.DEBUG,logging.INFO)
+    createfoldersnap_logger.debug('Starting def_CreateXMSFolderSnap module')
+
+    payload = '{\
+        "source-folder-id": \"/'+XMS_SRC_FOLDER+'\" , \
+        "suffix": \"'+XMS_TGT_SUFFIX+'\" ,\
+        "folder-id": \"/'+XMS_TGT_FOLDER+'\" \
+        }'
+
+    j=json.loads(payload)
+
+    createfoldersnap_logger.debug('JSON dumps: '+json.dumps(j))
+
+    try:
+        resp = requests.post(
+            'https://'+XMS_IP+'/api/json/'+XMS_URL,
+            auth=HTTPBasicAuth(XMS_USERID,XMS_PASSWORD),
+            verify=False,
+            json=j
+            )
+    except requests.exceptions.RequestException as e:
+        createfoldersnap_logger.info(e)
+        createfoldersnap_logger.error(e)
+        sys.exit(1)
+
+    createfoldersnap_logger.debug('Payload: '+json.dumps(payload))
+    if resp.status_code == 201:
+        createfoldersnap_logger.info('Create Folder Snap Status: <'+str(resp.status_code)+'>')
+        createfoldersnap_logger.debug(resp.text)
+    else:
+        createfoldersnap_logger.info('Create Folder Snap Status: <'+str(resp.status_code)+'>')
+        createfoldersnap_logger.info(resp.text)
+
+    return resp
+
+##%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 ##  def_CreateXMSFolder
 ##
 ##  Creates a folder (XMS_FOLDER) under the parent folder (XMS_PARENTFOLDER).
@@ -706,6 +884,47 @@ def def_GetSnapList(
     arr_snap_list = []
     arr_snap_list = resp.json()['content']['dest-snap-list']
     return arr_snap_list
+
+##%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+##  def_GetVolList
+##
+##  Takes a LUN name (XMS_VOLUME) and returns an array containing the names of
+##  all the snaps associated with that volume.
+##%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+def def_GetVolList(
+    XMS_IP,
+    XMS_USERID,
+    XMS_PASSWORD,
+    XMS_FOLDER):
+
+    getvollist_logger = def_FuncLogger(logging.DEBUG,logging.INFO)
+    getvollist_logger.debug('Starting GetVolList Module')
+
+    getvollist_logger.info('Getting the list of volumes for '+XMS_FOLDER)
+
+    try:
+        resp = requests.get(
+            'https://'+XMS_IP+'/api/json/types/volume-folders/?name=/'+XMS_FOLDER,
+            auth=HTTPBasicAuth(XMS_USERID,XMS_PASSWORD),
+            verify=False
+            )
+    except requests.exceptions.RequestException as e:
+        getvollist_logger.info(e)
+        getvollist_logger.error(e)
+        sys.exit(1)
+
+    if resp.status_code == 200:
+        getvollist_logger.info('Get Snap List Status: <'+str(resp.status_code)+'>')
+        getvollist_logger.debug(resp.text)
+    else:
+        getvollist_logger.info('Get Snap List Status: <'+str(resp.status_code)+'>')
+        getvollist_logger.info(resp.text)
+        sys.exit(1)
+
+    arr_vol_list = []
+    arr_vol_list = resp.json()['content']['direct-list']
+    return arr_vol_list
 
 ##%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 ##  def_DeleteSnap
