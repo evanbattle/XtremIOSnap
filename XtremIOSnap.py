@@ -315,7 +315,10 @@ def main():
         arr_vol_snap_list_component = []
         for vol_snap_list_rs in vol_snap_list:
             if newsnapsuffix in vol_snap_list_rs[1]:
-                arr_vol_snap_list_component.append(vol_snap_list_rs[1])
+                if '.folder.' in vol_snap_list_rs[1]:
+                    pass
+                else:
+                    arr_vol_snap_list_component.append(vol_snap_list_rs[1])
 
         arr_vol_snap_list_component.sort(reverse=True)
         for y in range(len(arr_vol_snap_list_component)): ##<--shifting the suffix of each matchin snap by 1
@@ -409,7 +412,10 @@ def main():
         arr_vol_snap_list_component = []
         for vol_snap_list_rs in vol_snap_list:
             if newsnapsuffix in vol_snap_list_rs[1]:
-                arr_vol_snap_list_component.append(vol_snap_list_rs[1])
+                if '.folder.' in vol_snap_list_rs[1]:
+                    pass
+                else:
+                    arr_vol_snap_list_component.append(vol_snap_list_rs[1])
 
         arr_vol_snap_list_component.sort(reverse=False)
 
