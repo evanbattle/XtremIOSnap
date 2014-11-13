@@ -888,8 +888,8 @@ def def_GetSnapList(
 ##%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 ##  def_GetVolList
 ##
-##  Takes a LUN name (XMS_VOLUME) and returns an array containing the names of
-##  all the snaps associated with that volume.
+##  Takes a Folder name (XMS_Folder) and returns an array containing the volume
+##  names associated with that Folder.
 ##%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 def def_GetVolList(
