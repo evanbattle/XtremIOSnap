@@ -144,19 +144,13 @@ def main():
             "folder-id": \"/'+snap_tgt_folder+'\" \
             }'
         vol_snap = rest._post('/api/json/types/snapshots',fs_payload)
-##        vol_snap = Post(log,XMS_IP,'/api/json/types/snapshots',XMS_USER,XMS_PASS,fs_payload)
-
         folder_vol_list = rest._get('/api/json/types/volume-folders/?name=/'+snap_src).json()['content']['direct-list']
-
-##        folder_vol_list = Get(log,XMS_IP,'/api/json/types/volume-folders/?name=/'+snap_src,XMS_USER,XMS_PASS).json()['content']['direct-list']
         arr_folder_vol_list_component = []
         for folder_vol_list_rs in folder_vol_list:
             if '/_Snapshots' in folder_vol_list_rs[1]:
                 pass
             else:
                 vol_snap_list = rest._get('/api/json/types/volumes/?name='+folder_vol_list_rs [1]).json()['content']['dest-snap-list']##<--Refresh the snap list
-##                vol_snap_list = Get(log,XMS_IP,'/api/json/types/volumes/?name='+folder_vol_list_rs [1],XMS_USER,XMS_PASS)##<--Refresh the snap list
-
                 arr_vol_snap_list_component = []
                 for vol_snap_list_rs in vol_snap_list:
                     if newsnapsuffix in vol_snap_list_rs[1]:
@@ -168,8 +162,6 @@ def main():
                     if newsnapsuffix in arr_vol_snap_list_component[x]:
                         main_logger.info(str(x)+': '+ arr_vol_snap_list_component[x])
                         get_snap_details = rest._get('/api/json/types/snapshots/?name='+arr_vol_snap_list_component[x])
-##                        get_snap_details = Get(log,XMS_IP,'/api/json/types/snapshots/?name='+arr_vol_snap_list_component[x],XMS_USER,XMS_PASS)
-
                         arr_ancestor_vol_id = get_snap_details.json()['content']['ancestor-vol-id']
                         snap_parent_name = arr_ancestor_vol_id[1]
                         snap_creation_time = get_snap_details.json()['content']['creation-time']
@@ -191,13 +183,11 @@ def main():
                         else:
                             main_logger.info('No hosts mapped to '+arr_vol_snap_list_component[x]+', it will be deleted.')
                             delete_status = rest._delete('/api/json/types/volumes/?name='+arr_vol_snap_list_component[x])
-##                            delete_status = Delete(log,XMS_IP,'/api/json/types/volumes/?name='+arr_vol_snap_list_component[x],XMS_USER,XMS_PASS)
 
     elif options['--v'] ==True:
         main_logger.info('Will retain '+num_snaps+' snapshots for volume: '+snap_src)
         newsnapsuffix = '.'+main_options.schedule+'.'
         vol_snap_list = rest._get('/api/json/types/volumes/?name='+snap_src).json()['content']['dest-snap-list']
-##        vol_snap_list = Get(log,XMS_IP,'/api/json/types/volumes/?name='+snap_src,XMS_USER,XMS_PASS).json()['content']['dest-snap-list']
         arr_vol_snap_list_component = []
         for vol_snap_list_rs in vol_snap_list:
             if newsnapsuffix in vol_snap_list_rs[1]:
@@ -219,7 +209,7 @@ def main():
 
                 if rename_resp.status_code == 200:
                             main_logger.info(arr_vol_snap_list_component[y]+' was renamed to '+rename_to)
-##                rename_resp = Put(log,XMS_IP,'/api/json/types/volumes/?name='+arr_vol_snap_list_component[y],XMS_USER,XMS_PASS,rename_payload)
+
         timestamp = datetime.datetime.now()
         timestamp = timestamp.isoformat()
         arr_timestamp = timestamp.split('.',2) ##<--stripping the microseconds from the timestamp for aesthetics
@@ -231,9 +221,7 @@ def main():
             "folder-id": \"/'+snap_tgt_folder+'\" \
             }'
         vol_snap_resp = rest._post('/api/json/types/snapshots',vol_snap_payload)
-##        vol_snap_resp = Post(log,XMS_IP,'/api/json/types/snapshots',XMS_USER,XMS_PASS,vol_snap_payload)
         vol_snap_list = rest._get('/api/json/types/volumes/?name='+snap_src).json()['content']['dest-snap-list']
-##        vol_snap_list = Get(log,XMS_IP,'/api/json/types/volumes/?name='+snap_src,XMS_USER,XMS_PASS).json()['content']['dest-snap-list']
         arr_vol_snap_list_component = []
         for vol_snap_list_rs in vol_snap_list:
             if newsnapsuffix in vol_snap_list_rs[1]:
@@ -248,19 +236,14 @@ def main():
             if newsnapsuffix in arr_vol_snap_list_component[x]:
                 main_logger.info(str(x)+': '+ arr_vol_snap_list_component[x])
                 get_snap_details = rest._get('/api/json/types/snapshots/?name='+arr_vol_snap_list_component[x])
-
-##                get_snap_details = Get(log,XMS_IP,'/api/json/types/snapshots/?name='+arr_vol_snap_list_component[x],XMS_USER,XMS_PASS)
-
                 arr_ancestor_vol_id = get_snap_details.json()['content']['ancestor-vol-id']
                 snap_parent_name = arr_ancestor_vol_id[1]
                 snap_creation_time = get_snap_details.json()['content']['creation-time']
                 snap_space_consumed = get_snap_details.json()['content']['logical-space-in-use']
                 arr_snap_lun_mapping = get_snap_details.json()['content']['lun-mapping-list']
-
                 main_logger.info('Parent Volume of '+arr_vol_snap_list_component[x]+' = '+snap_parent_name)
                 main_logger.info('Snap was created on '+snap_creation_time)
                 main_logger.info('Snap is using '+ str((float(snap_space_consumed)/1024)/1024)+' GB')
-
                 arr_lun_mapping_component = []
 
                 if len(arr_snap_lun_mapping) > 0:##<--checking to see if an active LUN mapping exists
@@ -273,18 +256,12 @@ def main():
                 else:
                     main_logger.info('No hosts mapped to '+arr_vol_snap_list_component[x]+', it will be deleted.')
                     delete_status = rest._delete('/api/json/types/volumes/?name='+arr_vol_snap_list_component[x])
-
-##                    delete_status = Delete(log,XMS_IP,'/api/json/types/volumes/?name='+arr_vol_snap_list_component[x],XMS_USER,XMS_PASS)
-
     else:
         print 'NO FOLDER OR VOLUME OPTION SPECIFIED'
         sys.exit(1)
 
-
     main_logger.info('Complete!')
-
     sys.exit(0)
-
 
 if __name__ == '__main__':
     original_sigint = signal.getsignal(signal.SIGINT)
