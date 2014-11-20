@@ -1,0 +1,1202 @@
+2014-11-20 16:55:28,115 - 208 -     INFO - Running XtremIO Snap Script
+2014-11-20 16:55:28,115 - 211 -     INFO - Encoding User ID:
+2014-11-20 16:55:28,115 - 212 -     INFO - UserID hash is YWRtaW4=
+2014-11-20 16:55:28,118 - 213 -     INFO - Password hash is WHRyZW0xMA==
+2014-11-20 16:55:28,121 - 214 -     INFO - Use the hash vaues as the User ID and Password when using the -ux and -px switches.
+2014-11-20 16:57:17,664 - 208 -     INFO - Running XtremIO Snap Script
+2014-11-20 16:57:17,664 - 248 -     INFO - Using the .daily. option
+2014-11-20 16:57:17,665 - 254 -     INFO - Target XMS system is - 10.5.39.118
+2014-11-20 16:57:17,671 - 566 -    DEBUG - Starting def_CheckEncoding module
+2014-11-20 16:57:17,671 - 574 -     INFO - User ID is encoded.
+2014-11-20 16:57:17,671 - 591 -     INFO - Password is encoded.
+2014-11-20 16:57:17,674 - 270 -     INFO - Volume selected to snapshot = Battle_test1
+2014-11-20 16:57:17,680 - 284 -     INFO - Snapshot will be stored in the folder: _Snapshots
+2014-11-20 16:57:17,686 - 829 -    DEBUG - Starting XMSGetRequest Module
+2014-11-20 16:57:18,183 - 843 -     INFO - Get Request Status: <200>
+2014-11-20 16:57:18,201 - 844 -    DEBUG - {
+    "folders": [
+        {
+            "href": "https://10.5.39.118/api/json/types/volume-folders/11", 
+            "name": "/Columbia/volumes"
+        }, 
+        {
+            "href": "https://10.5.39.118/api/json/types/volume-folders/10", 
+            "name": "/Battle"
+        }, 
+        {
+            "href": "https://10.5.39.118/api/json/types/volume-folders/13", 
+            "name": "/hirstfolder-snapshot"
+        }, 
+        {
+            "href": "https://10.5.39.118/api/json/types/volume-folders/12", 
+            "name": "/Columbia"
+        }, 
+        {
+            "href": "https://10.5.39.118/api/json/types/volume-folders/15", 
+            "name": "/Columbia/snapshots"
+        }, 
+        {
+            "href": "https://10.5.39.118/api/json/types/volume-folders/14", 
+            "name": "/Test-Dev"
+        }, 
+        {
+            "href": "https://10.5.39.118/api/json/types/volume-folders/17", 
+            "name": "/FolderSnapTest/_Snapshots"
+        }, 
+        {
+            "href": "https://10.5.39.118/api/json/types/volume-folders/16", 
+            "name": "/FolderSnapTest"
+        }, 
+        {
+            "href": "https://10.5.39.118/api/json/types/volume-folders/18", 
+            "name": "/Philly Infrastructure/SQLTest"
+        }, 
+        {
+            "href": "https://10.5.39.118/api/json/types/volume-folders/1", 
+            "name": "/"
+        }, 
+        {
+            "href": "https://10.5.39.118/api/json/types/volume-folders/3", 
+            "name": "/Philly Infrastructure"
+        }, 
+        {
+            "href": "https://10.5.39.118/api/json/types/volume-folders/2", 
+            "name": "/hirstfolder"
+        }, 
+        {
+            "href": "https://10.5.39.118/api/json/types/volume-folders/5", 
+            "name": "/Philly Infrastructure/snapshots"
+        }, 
+        {
+            "href": "https://10.5.39.118/api/json/types/volume-folders/4", 
+            "name": "/Philly Infrastructure/volumes"
+        }, 
+        {
+            "href": "https://10.5.39.118/api/json/types/volume-folders/7", 
+            "name": "/Ghiorzi Storage Demo/volumes"
+        }, 
+        {
+            "href": "https://10.5.39.118/api/json/types/volume-folders/6", 
+            "name": "/Ghiorzi Storage Demo"
+        }, 
+        {
+            "href": "https://10.5.39.118/api/json/types/volume-folders/9", 
+            "name": "/Battle/_Snapshots"
+        }, 
+        {
+            "href": "https://10.5.39.118/api/json/types/volume-folders/8", 
+            "name": "/Ghiorzi Storage Demo/snapshots"
+        }
+    ], 
+    "links": [
+        {
+            "href": "https://10.5.39.118/api/json/types/volume-folders/", 
+            "rel": "self"
+        }
+    ]
+}
+2014-11-20 16:57:18,203 - 781 -    DEBUG - Starting def_CreateXMSFolder module
+2014-11-20 16:57:18,203 - 782 -    DEBUG - 
+2014-11-20 16:57:18,203 - 788 -    DEBUG - JSON dumps: {"caption": "_Snapshots", "parent-folder-id": "/"}
+2014-11-20 16:57:18,903 - 802 -    DEBUG - Payload: {        "caption": "_Snapshots" ,         "parent-folder-id": "/"         }
+2014-11-20 16:57:18,903 - 805 -     INFO - Create Folder Status: <201>
+2014-11-20 16:57:18,903 - 806 -    DEBUG - {
+    "links": [
+        {
+            "href": "https://10.5.39.118/api/json/types/volume-folders/19", 
+            "rel": "self"
+        }
+    ]
+}
+2014-11-20 16:57:18,904 - 308 -     INFO - Using _Snapshots for snapshots
+2014-11-20 16:57:18,904 - 311 -     INFO - Will retain 1 snapshots for volume: Battle_test1
+2014-11-20 16:57:18,911 - 867 -    DEBUG - Starting GetSnapList Module
+2014-11-20 16:57:18,911 - 869 -     INFO - Getting the list of snaps for Battle_test1
+2014-11-20 16:57:19,177 - 883 -     INFO - Get Snap List Status: <200>
+2014-11-20 16:57:19,177 - 884 -    DEBUG - {
+    "content": {
+        "unaligned-io-alerts": "disabled", 
+        "small-io-alerts": "disabled", 
+        "small-iops": "0", 
+        "dest-snap-list": [
+            [
+                "fb6482cbecb44413acb790de0627b3e7", 
+                "Battle_test1_2014-11-03T21:12:29.daily.4", 
+                27
+            ], 
+            [
+                "7ee75fb4beef4ce8922717825390a64c", 
+                "Battle_test1_2014-11-04T17:44:38.hourly.4", 
+                22
+            ], 
+            [
+                "3273c01101574a83aebc031de0951696", 
+                "Battle_test1_2014-11-04T18:08:24.hourly.3", 
+                2
+            ], 
+            [
+                "590b97dce83047ff8478020fc772a3c0", 
+                "Battle_test1_2014-11-04T18:10:52.hourly.2", 
+                5
+            ], 
+            [
+                "99e9bac10e87466082aa623b90b373da", 
+                "Battle_test1_2014-11-05T13:18:46.hourly.1", 
+                31
+            ], 
+            [
+                "bd9adb4f9e9a4391ace39753d9149dd3", 
+                "Battle_test1_2014-11-05T13:23:07.hourly.0", 
+                11
+            ], 
+            [
+                "3e0c87d58d624ad6838b3594db3a94e9", 
+                "Battle_test1_2014-11-05T13:23:43.daily.3", 
+                30
+            ], 
+            [
+                "51eeba5f90084dbc8234f2547af62520", 
+                "Battle_test1_2014-11-13T14:14:25.folder.hourly.4", 
+                14
+            ], 
+            [
+                "11a68ba472a94614a9ff192b1f2fd222", 
+                "Battle_test1_2014-11-13T14:14:39.folder.hourly.3", 
+                23
+            ], 
+            [
+                "dfc7bf3f60904d7789b28caf011f3447", 
+                "Battle_test1_2014-11-13T14:14:53.folder.hourly.2", 
+                42
+            ], 
+            [
+                "3d5efebc39d64cf483f3bb7fce4e7fc6", 
+                "Battle_test1_2014-11-13T14:15:07.folder.hourly.1", 
+                46
+            ], 
+            [
+                "7d1ba6d0e51f409dac56400a21cda351", 
+                "Battle_test1_2014-11-13T14:15:30.folder.hourly.0", 
+                47
+            ], 
+            [
+                "78f719db50ae4b1b930e7959a141c697", 
+                "Battle_test1_2014-11-13T14:16:02.folder.daily.4", 
+                50
+            ], 
+            [
+                "e6813853ccaa4967a8556e918f4d62f2", 
+                "Battle_test1_2014-11-13T14:16:17.folder.daily.3", 
+                53
+            ], 
+            [
+                "c52292c3a1e341da8b5708f54eec5387", 
+                "Battle_test1_2014-11-13T14:16:56.folder.daily.2", 
+                55
+            ], 
+            [
+                "98b44e0f5b754de1b8f8fe7abe1c2dc7", 
+                "Battle_test1_2014-11-13T14:17:32.folder.daily.1", 
+                57
+            ], 
+            [
+                "f445e4adaadc45e68cc6097711141ac0", 
+                "Battle_test1_2014-11-13T14:24:03.folder.weekly.0", 
+                58
+            ], 
+            [
+                "2e44d51dbabc40368ec3a2e43706236b", 
+                "test2", 
+                59
+            ], 
+            [
+                "fc73d24c562a4b069902216c1a8586f9", 
+                "Battle_test1_2014-11-13T14:24:53.daily.2", 
+                43
+            ], 
+            [
+                "a6bc6aa8a2c34c2fb3c04011d9d6ef25", 
+                "Battle_test1_2014-11-13T14:25:04.daily.1", 
+                19
+            ], 
+            [
+                "8a8d05415f654e50bd3c76621ad2c123", 
+                "Battle_test1_2014-11-13T14:25:55.daily.0", 
+                25
+            ], 
+            [
+                "e15923e201124caa9f81611c9e3090dc", 
+                "Battle_test1_2014-11-13T14:26:16.folder.daily.0", 
+                60
+            ], 
+            [
+                "e5677d0e83fd4e6aa7426c00978e98c7", 
+                "test3", 
+                69
+            ], 
+            [
+                "b3ee321f30e34bc2a8aa4b755ed9aaf0", 
+                "Battle_test1_2014-11-20T15:03:58.weekly.4", 
+                75
+            ], 
+            [
+                "e770036d74514a308cc7de3675d27fc6", 
+                "Battle_test1_2014-11-20T15:04:24.weekly.3", 
+                76
+            ], 
+            [
+                "9a59c1f33a664b53b5dc8510a5dbc08d", 
+                "Battle_test1_2014-11-20T15:05:27.weekly.2", 
+                70
+            ], 
+            [
+                "17e08b3f72164aa29aafa234370f22e1", 
+                "Battle_test1_2014-11-20T15:05:37.weekly.1", 
+                71
+            ], 
+            [
+                "8ba84be286f4418486f4f747982c8105", 
+                "Battle_test1_2014-11-20T15:44:31.weekly.0", 
+                72
+            ], 
+            [
+                "05065de2db5b4f1ea9d76f6a8d775134", 
+                "Battle_test1_2014-11-20T15:45:57.folder.weekly.0", 
+                74
+            ], 
+            [
+                "dfc32d8dc4de4c8a955147c4296efbda", 
+                "Battle_test1_2014-11-20T15:46:17.folder.weekly.0", 
+                78
+            ], 
+            [
+                "138ed81dbbad412684dd2ede305dbe0a", 
+                "Battle_test1_2014-11-20T15:50:24.folder.daily.0", 
+                80
+            ], 
+            [
+                "c026c6be0b074a998c7cd541aa6bf6e1", 
+                "Battle_test1_2014-11-20T15:57:03.folder.daily.0", 
+                82
+            ], 
+            [
+                "a08392c9089549dfbd562d9d51ba81f7", 
+                "Battle_test1_2014-11-20T16:33:48.folder.daily.0", 
+                84
+            ], 
+            [
+                "3c65f6d93ca04bb59206d5107dd7a4eb", 
+                "Battle_test1_2014-11-20T16:45:02.folder.daily.0", 
+                86
+            ], 
+            [
+                "57874d545462443ca449558f50ba5e88", 
+                "Battle_test1_2014-11-20T16:48:36.folder.daily.0", 
+                88
+            ], 
+            [
+                "9e51f9b012194d56be4b5b0c6e93a38b", 
+                "Battle_test1_2014-11-20T16:48:52.folder.daily.0", 
+                90
+            ], 
+            [
+                "cdd78f7f17c54bb899e212040e184d52", 
+                "Battle_test1_2014-11-20T16:50:49.folder.daily.0", 
+                92
+            ], 
+            [
+                "8992a3baada2477c8fb47efcf2039ec8", 
+                "Battle_test1_2014-11-20T16:52:29.folder.daily.0", 
+                94
+            ]
+        ], 
+        "vol-id": [
+            "ffa4faddf72d4a26bf3460101e91e7db", 
+            "Battle_test1", 
+            18
+        ], 
+        "obj-severity": "information", 
+        "num-of-lun-mappings": 0, 
+        "unaligned-rd-bw": "0", 
+        "num-of-dest-snaps": 38, 
+        "iops": "0", 
+        "acc-num-of-small-wr": "0", 
+        "alignment-offset": 0, 
+        "lb-size": 512, 
+        "logical-space-in-use": "0", 
+        "unaligned-io-ratio-level": "ok", 
+        "acc-num-of-rd": "0", 
+        "index": 18, 
+        "small-rd-bw": "0", 
+        "naa-name": "", 
+        "acc-size-of-wr": "0", 
+        "acc-num-of-small-rd": "0", 
+        "unaligned-rd-iops": "0", 
+        "wr-latency": "0", 
+        "snapgrp-id": [
+            "2efe14d415094f0c8ee2494bc39439ad", 
+            "", 
+            9
+        ], 
+        "ancestor-vol-id": [], 
+        "vaai-tp-alerts": "disabled", 
+        "creation-time": "2014-11-01 13:29:05", 
+        "rd-bw": "0", 
+        "xms-id": [
+            "96aa1f6a6ca945a2816899241658f919", 
+            "xms", 
+            1
+        ], 
+        "compressible": "yes", 
+        "small-wr-bw": "0", 
+        "acc-num-of-unaligned-rd": "0", 
+        "lu-name": "", 
+        "unaligned-iops": "0", 
+        "unaligned-bw": "0", 
+        "bw": "0", 
+        "small-io-ratio-level": "ok", 
+        "lun-mapping-list": [], 
+        "vol-size": "104857600", 
+        "wr-iops": "0", 
+        "sys-id": [
+            "f557e37a2fb44af19f7e357ae42d5146", 
+            "Philly-xio", 
+            1
+        ], 
+        "avg-latency": "0", 
+        "rd-latency": "0", 
+        "small-wr-iops": "0", 
+        "small-bw": "0", 
+        "name": "Battle_test1", 
+        "acc-num-of-unaligned-wr": "0", 
+        "unaligned-wr-iops": "0", 
+        "acc-num-of-wr": "0", 
+        "small-io-ratio": "0", 
+        "acc-size-of-rd": "0", 
+        "unaligned-wr-bw": "0", 
+        "small-rd-iops": "0", 
+        "unaligned-io-ratio": "0", 
+        "rd-iops": "0", 
+        "wr-bw": "0"
+    }, 
+    "links": [
+        {
+            "href": "https://10.5.39.118/api/json/types/volumes/18", 
+            "rel": "self"
+        }
+    ]
+}
+2014-11-20 16:57:19,178 - 519 -    DEBUG - Starting def_RenameSnap module
+2014-11-20 16:57:19,180 - 525 -    DEBUG - JSON dumps: {"vol-name": "Battle_test1_2014-11-13T14:25:55.daily.1"}
+2014-11-20 16:57:19,474 - 539 -    DEBUG - Payload: "{\"vol-name\": \"Battle_test1_2014-11-13T14:25:55.daily.1\"}"
+2014-11-20 16:57:19,474 - 541 -     INFO - Response code received from XMS for RenameSnap: <200>
+2014-11-20 16:57:19,474 - 542 -     INFO - Battle_test1_2014-11-13T14:25:55.daily.0 was renamed to Battle_test1_2014-11-13T14:25:55.daily.1
+2014-11-20 16:57:19,480 - 543 -    DEBUG - 
+2014-11-20 16:57:19,480 - 519 -    DEBUG - Starting def_RenameSnap module
+2014-11-20 16:57:19,482 - 525 -    DEBUG - JSON dumps: {"vol-name": "Battle_test1_2014-11-13T14:25:04.daily.2"}
+2014-11-20 16:57:19,769 - 539 -    DEBUG - Payload: "{\"vol-name\": \"Battle_test1_2014-11-13T14:25:04.daily.2\"}"
+2014-11-20 16:57:19,769 - 541 -     INFO - Response code received from XMS for RenameSnap: <200>
+2014-11-20 16:57:19,769 - 542 -     INFO - Battle_test1_2014-11-13T14:25:04.daily.1 was renamed to Battle_test1_2014-11-13T14:25:04.daily.2
+2014-11-20 16:57:19,769 - 543 -    DEBUG - 
+2014-11-20 16:57:19,772 - 519 -    DEBUG - Starting def_RenameSnap module
+2014-11-20 16:57:19,772 - 525 -    DEBUG - JSON dumps: {"vol-name": "Battle_test1_2014-11-13T14:24:53.daily.3"}
+2014-11-20 16:57:20,055 - 539 -    DEBUG - Payload: "{\"vol-name\": \"Battle_test1_2014-11-13T14:24:53.daily.3\"}"
+2014-11-20 16:57:20,055 - 541 -     INFO - Response code received from XMS for RenameSnap: <200>
+2014-11-20 16:57:20,056 - 542 -     INFO - Battle_test1_2014-11-13T14:24:53.daily.2 was renamed to Battle_test1_2014-11-13T14:24:53.daily.3
+2014-11-20 16:57:20,058 - 543 -    DEBUG - 
+2014-11-20 16:57:20,059 - 519 -    DEBUG - Starting def_RenameSnap module
+2014-11-20 16:57:20,059 - 525 -    DEBUG - JSON dumps: {"vol-name": "Battle_test1_2014-11-05T13:23:43.daily.4"}
+2014-11-20 16:57:20,345 - 539 -    DEBUG - Payload: "{\"vol-name\": \"Battle_test1_2014-11-05T13:23:43.daily.4\"}"
+2014-11-20 16:57:20,345 - 541 -     INFO - Response code received from XMS for RenameSnap: <200>
+2014-11-20 16:57:20,346 - 542 -     INFO - Battle_test1_2014-11-05T13:23:43.daily.3 was renamed to Battle_test1_2014-11-05T13:23:43.daily.4
+2014-11-20 16:57:20,348 - 543 -    DEBUG - 
+2014-11-20 16:57:20,349 - 519 -    DEBUG - Starting def_RenameSnap module
+2014-11-20 16:57:20,349 - 525 -    DEBUG - JSON dumps: {"vol-name": "Battle_test1_2014-11-03T21:12:29.daily.5"}
+2014-11-20 16:57:20,653 - 539 -    DEBUG - Payload: "{\"vol-name\": \"Battle_test1_2014-11-03T21:12:29.daily.5\"}"
+2014-11-20 16:57:20,653 - 541 -     INFO - Response code received from XMS for RenameSnap: <200>
+2014-11-20 16:57:20,653 - 542 -     INFO - Battle_test1_2014-11-03T21:12:29.daily.4 was renamed to Battle_test1_2014-11-03T21:12:29.daily.5
+2014-11-20 16:57:20,654 - 543 -    DEBUG - 
+2014-11-20 16:57:20,655 - 676 -    DEBUG - Starting def_CreateXMSSnap module
+2014-11-20 16:57:20,655 - 686 -    DEBUG - JSON dumps: {"ancestor-vol-id": "Battle_test1", "folder-id": "/_Snapshots", "snap-vol-name": "Battle_test1_2014-11-20T16:57:20.daily.0"}
+2014-11-20 16:57:20,971 - 700 -    DEBUG - Payload: "{        \"ancestor-vol-id\": \"Battle_test1\" ,         \"snap-vol-name\": \"Battle_test1_2014-11-20T16:57:20.daily.0\" ,        \"folder-id\": \"/_Snapshots\"         }"
+2014-11-20 16:57:20,971 - 702 -     INFO - Create Snap Status: <201>
+2014-11-20 16:57:20,973 - 703 -    DEBUG - {
+    "links": [
+        {
+            "href": "https://10.5.39.118/api/json/types/snapshots/95", 
+            "rel": "self"
+        }
+    ]
+}
+2014-11-20 16:57:20,973 - 867 -    DEBUG - Starting GetSnapList Module
+2014-11-20 16:57:20,973 - 869 -     INFO - Getting the list of snaps for Battle_test1
+2014-11-20 16:57:21,431 - 883 -     INFO - Get Snap List Status: <200>
+2014-11-20 16:57:21,433 - 884 -    DEBUG - {
+    "content": {
+        "unaligned-io-alerts": "disabled", 
+        "small-io-alerts": "disabled", 
+        "small-iops": "0", 
+        "dest-snap-list": [
+            [
+                "fb6482cbecb44413acb790de0627b3e7", 
+                "Battle_test1_2014-11-03T21:12:29.daily.5", 
+                27
+            ], 
+            [
+                "7ee75fb4beef4ce8922717825390a64c", 
+                "Battle_test1_2014-11-04T17:44:38.hourly.4", 
+                22
+            ], 
+            [
+                "3273c01101574a83aebc031de0951696", 
+                "Battle_test1_2014-11-04T18:08:24.hourly.3", 
+                2
+            ], 
+            [
+                "590b97dce83047ff8478020fc772a3c0", 
+                "Battle_test1_2014-11-04T18:10:52.hourly.2", 
+                5
+            ], 
+            [
+                "99e9bac10e87466082aa623b90b373da", 
+                "Battle_test1_2014-11-05T13:18:46.hourly.1", 
+                31
+            ], 
+            [
+                "bd9adb4f9e9a4391ace39753d9149dd3", 
+                "Battle_test1_2014-11-05T13:23:07.hourly.0", 
+                11
+            ], 
+            [
+                "3e0c87d58d624ad6838b3594db3a94e9", 
+                "Battle_test1_2014-11-05T13:23:43.daily.4", 
+                30
+            ], 
+            [
+                "51eeba5f90084dbc8234f2547af62520", 
+                "Battle_test1_2014-11-13T14:14:25.folder.hourly.4", 
+                14
+            ], 
+            [
+                "11a68ba472a94614a9ff192b1f2fd222", 
+                "Battle_test1_2014-11-13T14:14:39.folder.hourly.3", 
+                23
+            ], 
+            [
+                "dfc7bf3f60904d7789b28caf011f3447", 
+                "Battle_test1_2014-11-13T14:14:53.folder.hourly.2", 
+                42
+            ], 
+            [
+                "3d5efebc39d64cf483f3bb7fce4e7fc6", 
+                "Battle_test1_2014-11-13T14:15:07.folder.hourly.1", 
+                46
+            ], 
+            [
+                "7d1ba6d0e51f409dac56400a21cda351", 
+                "Battle_test1_2014-11-13T14:15:30.folder.hourly.0", 
+                47
+            ], 
+            [
+                "78f719db50ae4b1b930e7959a141c697", 
+                "Battle_test1_2014-11-13T14:16:02.folder.daily.4", 
+                50
+            ], 
+            [
+                "e6813853ccaa4967a8556e918f4d62f2", 
+                "Battle_test1_2014-11-13T14:16:17.folder.daily.3", 
+                53
+            ], 
+            [
+                "c52292c3a1e341da8b5708f54eec5387", 
+                "Battle_test1_2014-11-13T14:16:56.folder.daily.2", 
+                55
+            ], 
+            [
+                "98b44e0f5b754de1b8f8fe7abe1c2dc7", 
+                "Battle_test1_2014-11-13T14:17:32.folder.daily.1", 
+                57
+            ], 
+            [
+                "f445e4adaadc45e68cc6097711141ac0", 
+                "Battle_test1_2014-11-13T14:24:03.folder.weekly.0", 
+                58
+            ], 
+            [
+                "2e44d51dbabc40368ec3a2e43706236b", 
+                "test2", 
+                59
+            ], 
+            [
+                "fc73d24c562a4b069902216c1a8586f9", 
+                "Battle_test1_2014-11-13T14:24:53.daily.3", 
+                43
+            ], 
+            [
+                "a6bc6aa8a2c34c2fb3c04011d9d6ef25", 
+                "Battle_test1_2014-11-13T14:25:04.daily.2", 
+                19
+            ], 
+            [
+                "8a8d05415f654e50bd3c76621ad2c123", 
+                "Battle_test1_2014-11-13T14:25:55.daily.1", 
+                25
+            ], 
+            [
+                "e15923e201124caa9f81611c9e3090dc", 
+                "Battle_test1_2014-11-13T14:26:16.folder.daily.0", 
+                60
+            ], 
+            [
+                "e5677d0e83fd4e6aa7426c00978e98c7", 
+                "test3", 
+                69
+            ], 
+            [
+                "b3ee321f30e34bc2a8aa4b755ed9aaf0", 
+                "Battle_test1_2014-11-20T15:03:58.weekly.4", 
+                75
+            ], 
+            [
+                "e770036d74514a308cc7de3675d27fc6", 
+                "Battle_test1_2014-11-20T15:04:24.weekly.3", 
+                76
+            ], 
+            [
+                "9a59c1f33a664b53b5dc8510a5dbc08d", 
+                "Battle_test1_2014-11-20T15:05:27.weekly.2", 
+                70
+            ], 
+            [
+                "17e08b3f72164aa29aafa234370f22e1", 
+                "Battle_test1_2014-11-20T15:05:37.weekly.1", 
+                71
+            ], 
+            [
+                "8ba84be286f4418486f4f747982c8105", 
+                "Battle_test1_2014-11-20T15:44:31.weekly.0", 
+                72
+            ], 
+            [
+                "05065de2db5b4f1ea9d76f6a8d775134", 
+                "Battle_test1_2014-11-20T15:45:57.folder.weekly.0", 
+                74
+            ], 
+            [
+                "dfc32d8dc4de4c8a955147c4296efbda", 
+                "Battle_test1_2014-11-20T15:46:17.folder.weekly.0", 
+                78
+            ], 
+            [
+                "138ed81dbbad412684dd2ede305dbe0a", 
+                "Battle_test1_2014-11-20T15:50:24.folder.daily.0", 
+                80
+            ], 
+            [
+                "c026c6be0b074a998c7cd541aa6bf6e1", 
+                "Battle_test1_2014-11-20T15:57:03.folder.daily.0", 
+                82
+            ], 
+            [
+                "a08392c9089549dfbd562d9d51ba81f7", 
+                "Battle_test1_2014-11-20T16:33:48.folder.daily.0", 
+                84
+            ], 
+            [
+                "3c65f6d93ca04bb59206d5107dd7a4eb", 
+                "Battle_test1_2014-11-20T16:45:02.folder.daily.0", 
+                86
+            ], 
+            [
+                "57874d545462443ca449558f50ba5e88", 
+                "Battle_test1_2014-11-20T16:48:36.folder.daily.0", 
+                88
+            ], 
+            [
+                "9e51f9b012194d56be4b5b0c6e93a38b", 
+                "Battle_test1_2014-11-20T16:48:52.folder.daily.0", 
+                90
+            ], 
+            [
+                "cdd78f7f17c54bb899e212040e184d52", 
+                "Battle_test1_2014-11-20T16:50:49.folder.daily.0", 
+                92
+            ], 
+            [
+                "8992a3baada2477c8fb47efcf2039ec8", 
+                "Battle_test1_2014-11-20T16:52:29.folder.daily.0", 
+                94
+            ], 
+            [
+                "39bfa960d04941789c866717f632143f", 
+                "Battle_test1_2014-11-20T16:57:20.daily.0", 
+                95
+            ]
+        ], 
+        "vol-id": [
+            "ffa4faddf72d4a26bf3460101e91e7db", 
+            "Battle_test1", 
+            18
+        ], 
+        "obj-severity": "information", 
+        "num-of-lun-mappings": 0, 
+        "unaligned-rd-bw": "0", 
+        "num-of-dest-snaps": 39, 
+        "iops": "0", 
+        "acc-num-of-small-wr": "0", 
+        "alignment-offset": 0, 
+        "lb-size": 512, 
+        "logical-space-in-use": "0", 
+        "unaligned-io-ratio-level": "ok", 
+        "acc-num-of-rd": "0", 
+        "index": 18, 
+        "small-rd-bw": "0", 
+        "naa-name": "", 
+        "acc-size-of-wr": "0", 
+        "acc-num-of-small-rd": "0", 
+        "unaligned-rd-iops": "0", 
+        "wr-latency": "0", 
+        "snapgrp-id": [
+            "2efe14d415094f0c8ee2494bc39439ad", 
+            "", 
+            9
+        ], 
+        "ancestor-vol-id": [], 
+        "vaai-tp-alerts": "disabled", 
+        "creation-time": "2014-11-01 13:29:05", 
+        "rd-bw": "0", 
+        "xms-id": [
+            "96aa1f6a6ca945a2816899241658f919", 
+            "xms", 
+            1
+        ], 
+        "compressible": "yes", 
+        "small-wr-bw": "0", 
+        "acc-num-of-unaligned-rd": "0", 
+        "lu-name": "", 
+        "unaligned-iops": "0", 
+        "unaligned-bw": "0", 
+        "bw": "0", 
+        "small-io-ratio-level": "ok", 
+        "lun-mapping-list": [], 
+        "vol-size": "104857600", 
+        "wr-iops": "0", 
+        "sys-id": [
+            "f557e37a2fb44af19f7e357ae42d5146", 
+            "Philly-xio", 
+            1
+        ], 
+        "avg-latency": "0", 
+        "rd-latency": "0", 
+        "small-wr-iops": "0", 
+        "small-bw": "0", 
+        "name": "Battle_test1", 
+        "acc-num-of-unaligned-wr": "0", 
+        "unaligned-wr-iops": "0", 
+        "acc-num-of-wr": "0", 
+        "small-io-ratio": "0", 
+        "acc-size-of-rd": "0", 
+        "unaligned-wr-bw": "0", 
+        "small-rd-iops": "0", 
+        "unaligned-io-ratio": "0", 
+        "rd-iops": "0", 
+        "wr-bw": "0"
+    }, 
+    "links": [
+        {
+            "href": "https://10.5.39.118/api/json/types/volumes/18", 
+            "rel": "self"
+        }
+    ]
+}
+2014-11-20 16:57:21,433 - 424 -     INFO - 0: Battle_test1_2014-11-03T21:12:29.daily.5
+2014-11-20 16:57:21,434 - 621 -    DEBUG - Starting def_XMSGetSnapDetails module
+2014-11-20 16:57:21,678 - 635 -     INFO - Response code received from XMS for GetSnapDetails: <200>
+2014-11-20 16:57:21,680 - 636 -    DEBUG - {
+    "content": {
+        "unaligned-io-alerts": "disabled", 
+        "small-io-alerts": "disabled", 
+        "small-iops": "0", 
+        "dest-snap-list": [], 
+        "vol-id": [
+            "fb6482cbecb44413acb790de0627b3e7", 
+            "Battle_test1_2014-11-03T21:12:29.daily.5", 
+            27
+        ], 
+        "obj-severity": "information", 
+        "num-of-lun-mappings": 0, 
+        "unaligned-rd-bw": "0", 
+        "num-of-dest-snaps": 0, 
+        "iops": "0", 
+        "acc-num-of-small-wr": "0", 
+        "alignment-offset": 0, 
+        "lb-size": 512, 
+        "logical-space-in-use": "0", 
+        "unaligned-io-ratio-level": "ok", 
+        "acc-num-of-rd": "0", 
+        "index": 27, 
+        "small-rd-bw": "0", 
+        "naa-name": "", 
+        "acc-size-of-wr": "0", 
+        "acc-num-of-small-rd": "0", 
+        "unaligned-rd-iops": "0", 
+        "wr-latency": "0", 
+        "snapgrp-id": [
+            "2efe14d415094f0c8ee2494bc39439ad", 
+            "", 
+            9
+        ], 
+        "ancestor-vol-id": [
+            "ffa4faddf72d4a26bf3460101e91e7db", 
+            "Battle_test1", 
+            18
+        ], 
+        "vaai-tp-alerts": "disabled", 
+        "creation-time": "2014-11-03 21:12:31", 
+        "rd-bw": "0", 
+        "xms-id": [
+            "96aa1f6a6ca945a2816899241658f919", 
+            "xms", 
+            1
+        ], 
+        "compressible": "yes", 
+        "small-wr-bw": "0", 
+        "acc-num-of-unaligned-rd": "0", 
+        "lu-name": "", 
+        "unaligned-iops": "0", 
+        "unaligned-bw": "0", 
+        "bw": "0", 
+        "small-io-ratio-level": "ok", 
+        "lun-mapping-list": [], 
+        "vol-size": "104857600", 
+        "wr-iops": "0", 
+        "sys-id": [
+            "f557e37a2fb44af19f7e357ae42d5146", 
+            "Philly-xio", 
+            1
+        ], 
+        "avg-latency": "0", 
+        "rd-latency": "0", 
+        "small-wr-iops": "0", 
+        "small-bw": "0", 
+        "name": "Battle_test1_2014-11-03T21:12:29.daily.5", 
+        "acc-num-of-unaligned-wr": "0", 
+        "unaligned-wr-iops": "0", 
+        "acc-num-of-wr": "0", 
+        "small-io-ratio": "0", 
+        "acc-size-of-rd": "0", 
+        "unaligned-wr-bw": "0", 
+        "small-rd-iops": "0", 
+        "unaligned-io-ratio": "0", 
+        "rd-iops": "0", 
+        "wr-bw": "0"
+    }, 
+    "links": [
+        {
+            "href": "https://10.5.39.118/api/json/types/snapshots/27", 
+            "rel": "self"
+        }
+    ]
+}
+2014-11-20 16:57:21,680 - 637 -     INFO - Snap details successfully retrieved.
+2014-11-20 16:57:21,680 - 431 -     INFO - Parent Volume of Battle_test1_2014-11-03T21:12:29.daily.5 = Battle_test1
+2014-11-20 16:57:21,684 - 432 -     INFO - Snap was created on 2014-11-03 21:12:31
+2014-11-20 16:57:21,686 - 433 -     INFO - Snap is using 0.0 GB
+2014-11-20 16:57:21,688 - 445 -     INFO - No hosts mapped to Battle_test1_2014-11-03T21:12:29.daily.5, it will be deleted.
+2014-11-20 16:57:21,693 - 951 -    DEBUG - Starting SeleteSnap Module
+2014-11-20 16:57:21,693 - 953 -     INFO - Deleting Snapshot: Battle_test1_2014-11-03T21:12:29.daily.5
+2014-11-20 16:57:22,029 - 966 -     INFO - Delete Snap Status: <200>
+2014-11-20 16:57:22,029 - 967 -    DEBUG - 
+2014-11-20 16:57:22,029 - 424 -     INFO - 1: Battle_test1_2014-11-05T13:23:43.daily.4
+2014-11-20 16:57:22,036 - 621 -    DEBUG - Starting def_XMSGetSnapDetails module
+2014-11-20 16:57:22,407 - 635 -     INFO - Response code received from XMS for GetSnapDetails: <200>
+2014-11-20 16:57:22,407 - 636 -    DEBUG - {
+    "content": {
+        "unaligned-io-alerts": "disabled", 
+        "small-io-alerts": "disabled", 
+        "small-iops": "0", 
+        "dest-snap-list": [], 
+        "vol-id": [
+            "3e0c87d58d624ad6838b3594db3a94e9", 
+            "Battle_test1_2014-11-05T13:23:43.daily.4", 
+            30
+        ], 
+        "obj-severity": "information", 
+        "num-of-lun-mappings": 0, 
+        "unaligned-rd-bw": "0", 
+        "num-of-dest-snaps": 0, 
+        "iops": "0", 
+        "acc-num-of-small-wr": "0", 
+        "alignment-offset": 0, 
+        "lb-size": 512, 
+        "logical-space-in-use": "0", 
+        "unaligned-io-ratio-level": "ok", 
+        "acc-num-of-rd": "0", 
+        "index": 30, 
+        "small-rd-bw": "0", 
+        "naa-name": "", 
+        "acc-size-of-wr": "0", 
+        "acc-num-of-small-rd": "0", 
+        "unaligned-rd-iops": "0", 
+        "wr-latency": "0", 
+        "snapgrp-id": [
+            "2efe14d415094f0c8ee2494bc39439ad", 
+            "", 
+            9
+        ], 
+        "ancestor-vol-id": [
+            "ffa4faddf72d4a26bf3460101e91e7db", 
+            "Battle_test1", 
+            18
+        ], 
+        "vaai-tp-alerts": "disabled", 
+        "creation-time": "2014-11-05 13:23:45", 
+        "rd-bw": "0", 
+        "xms-id": [
+            "96aa1f6a6ca945a2816899241658f919", 
+            "xms", 
+            1
+        ], 
+        "compressible": "yes", 
+        "small-wr-bw": "0", 
+        "acc-num-of-unaligned-rd": "0", 
+        "lu-name": "", 
+        "unaligned-iops": "0", 
+        "unaligned-bw": "0", 
+        "bw": "0", 
+        "small-io-ratio-level": "ok", 
+        "lun-mapping-list": [], 
+        "vol-size": "104857600", 
+        "wr-iops": "0", 
+        "sys-id": [
+            "f557e37a2fb44af19f7e357ae42d5146", 
+            "Philly-xio", 
+            1
+        ], 
+        "avg-latency": "0", 
+        "rd-latency": "0", 
+        "small-wr-iops": "0", 
+        "small-bw": "0", 
+        "name": "Battle_test1_2014-11-05T13:23:43.daily.4", 
+        "acc-num-of-unaligned-wr": "0", 
+        "unaligned-wr-iops": "0", 
+        "acc-num-of-wr": "0", 
+        "small-io-ratio": "0", 
+        "acc-size-of-rd": "0", 
+        "unaligned-wr-bw": "0", 
+        "small-rd-iops": "0", 
+        "unaligned-io-ratio": "0", 
+        "rd-iops": "0", 
+        "wr-bw": "0"
+    }, 
+    "links": [
+        {
+            "href": "https://10.5.39.118/api/json/types/snapshots/30", 
+            "rel": "self"
+        }
+    ]
+}
+2014-11-20 16:57:22,407 - 637 -     INFO - Snap details successfully retrieved.
+2014-11-20 16:57:22,408 - 431 -     INFO - Parent Volume of Battle_test1_2014-11-05T13:23:43.daily.4 = Battle_test1
+2014-11-20 16:57:22,411 - 432 -     INFO - Snap was created on 2014-11-05 13:23:45
+2014-11-20 16:57:22,414 - 433 -     INFO - Snap is using 0.0 GB
+2014-11-20 16:57:22,417 - 445 -     INFO - No hosts mapped to Battle_test1_2014-11-05T13:23:43.daily.4, it will be deleted.
+2014-11-20 16:57:22,421 - 951 -    DEBUG - Starting SeleteSnap Module
+2014-11-20 16:57:22,421 - 953 -     INFO - Deleting Snapshot: Battle_test1_2014-11-05T13:23:43.daily.4
+2014-11-20 16:57:23,009 - 966 -     INFO - Delete Snap Status: <200>
+2014-11-20 16:57:23,009 - 967 -    DEBUG - 
+2014-11-20 16:57:23,010 - 424 -     INFO - 2: Battle_test1_2014-11-13T14:24:53.daily.3
+2014-11-20 16:57:23,013 - 621 -    DEBUG - Starting def_XMSGetSnapDetails module
+2014-11-20 16:57:23,391 - 635 -     INFO - Response code received from XMS for GetSnapDetails: <200>
+2014-11-20 16:57:23,391 - 636 -    DEBUG - {
+    "content": {
+        "unaligned-io-alerts": "disabled", 
+        "small-io-alerts": "disabled", 
+        "small-iops": "0", 
+        "dest-snap-list": [], 
+        "vol-id": [
+            "fc73d24c562a4b069902216c1a8586f9", 
+            "Battle_test1_2014-11-13T14:24:53.daily.3", 
+            43
+        ], 
+        "obj-severity": "information", 
+        "num-of-lun-mappings": 0, 
+        "unaligned-rd-bw": "0", 
+        "num-of-dest-snaps": 0, 
+        "iops": "0", 
+        "acc-num-of-small-wr": "0", 
+        "alignment-offset": 0, 
+        "lb-size": 512, 
+        "logical-space-in-use": "0", 
+        "unaligned-io-ratio-level": "ok", 
+        "acc-num-of-rd": "0", 
+        "index": 43, 
+        "small-rd-bw": "0", 
+        "naa-name": "", 
+        "acc-size-of-wr": "0", 
+        "acc-num-of-small-rd": "0", 
+        "unaligned-rd-iops": "0", 
+        "wr-latency": "0", 
+        "snapgrp-id": [
+            "2efe14d415094f0c8ee2494bc39439ad", 
+            "", 
+            9
+        ], 
+        "ancestor-vol-id": [
+            "ffa4faddf72d4a26bf3460101e91e7db", 
+            "Battle_test1", 
+            18
+        ], 
+        "vaai-tp-alerts": "disabled", 
+        "creation-time": "2014-11-13 14:24:53", 
+        "rd-bw": "0", 
+        "xms-id": [
+            "96aa1f6a6ca945a2816899241658f919", 
+            "xms", 
+            1
+        ], 
+        "compressible": "yes", 
+        "small-wr-bw": "0", 
+        "acc-num-of-unaligned-rd": "0", 
+        "lu-name": "", 
+        "unaligned-iops": "0", 
+        "unaligned-bw": "0", 
+        "bw": "0", 
+        "small-io-ratio-level": "ok", 
+        "lun-mapping-list": [], 
+        "vol-size": "104857600", 
+        "wr-iops": "0", 
+        "sys-id": [
+            "f557e37a2fb44af19f7e357ae42d5146", 
+            "Philly-xio", 
+            1
+        ], 
+        "avg-latency": "0", 
+        "rd-latency": "0", 
+        "small-wr-iops": "0", 
+        "small-bw": "0", 
+        "name": "Battle_test1_2014-11-13T14:24:53.daily.3", 
+        "acc-num-of-unaligned-wr": "0", 
+        "unaligned-wr-iops": "0", 
+        "acc-num-of-wr": "0", 
+        "small-io-ratio": "0", 
+        "acc-size-of-rd": "0", 
+        "unaligned-wr-bw": "0", 
+        "small-rd-iops": "0", 
+        "unaligned-io-ratio": "0", 
+        "rd-iops": "0", 
+        "wr-bw": "0"
+    }, 
+    "links": [
+        {
+            "href": "https://10.5.39.118/api/json/types/snapshots/43", 
+            "rel": "self"
+        }
+    ]
+}
+2014-11-20 16:57:23,391 - 637 -     INFO - Snap details successfully retrieved.
+2014-11-20 16:57:23,392 - 431 -     INFO - Parent Volume of Battle_test1_2014-11-13T14:24:53.daily.3 = Battle_test1
+2014-11-20 16:57:23,395 - 432 -     INFO - Snap was created on 2014-11-13 14:24:53
+2014-11-20 16:57:23,398 - 433 -     INFO - Snap is using 0.0 GB
+2014-11-20 16:57:23,401 - 445 -     INFO - No hosts mapped to Battle_test1_2014-11-13T14:24:53.daily.3, it will be deleted.
+2014-11-20 16:57:23,405 - 951 -    DEBUG - Starting SeleteSnap Module
+2014-11-20 16:57:23,405 - 953 -     INFO - Deleting Snapshot: Battle_test1_2014-11-13T14:24:53.daily.3
+2014-11-20 16:57:23,917 - 966 -     INFO - Delete Snap Status: <200>
+2014-11-20 16:57:23,918 - 967 -    DEBUG - 
+2014-11-20 16:57:23,918 - 424 -     INFO - 3: Battle_test1_2014-11-13T14:25:04.daily.2
+2014-11-20 16:57:23,921 - 621 -    DEBUG - Starting def_XMSGetSnapDetails module
+2014-11-20 16:57:24,161 - 635 -     INFO - Response code received from XMS for GetSnapDetails: <200>
+2014-11-20 16:57:24,161 - 636 -    DEBUG - {
+    "content": {
+        "unaligned-io-alerts": "disabled", 
+        "small-io-alerts": "disabled", 
+        "small-iops": "0", 
+        "dest-snap-list": [], 
+        "vol-id": [
+            "a6bc6aa8a2c34c2fb3c04011d9d6ef25", 
+            "Battle_test1_2014-11-13T14:25:04.daily.2", 
+            19
+        ], 
+        "obj-severity": "information", 
+        "num-of-lun-mappings": 0, 
+        "unaligned-rd-bw": "0", 
+        "num-of-dest-snaps": 0, 
+        "iops": "0", 
+        "acc-num-of-small-wr": "0", 
+        "alignment-offset": 0, 
+        "lb-size": 512, 
+        "logical-space-in-use": "0", 
+        "unaligned-io-ratio-level": "ok", 
+        "acc-num-of-rd": "0", 
+        "index": 19, 
+        "small-rd-bw": "0", 
+        "naa-name": "", 
+        "acc-size-of-wr": "0", 
+        "acc-num-of-small-rd": "0", 
+        "unaligned-rd-iops": "0", 
+        "wr-latency": "0", 
+        "snapgrp-id": [
+            "2efe14d415094f0c8ee2494bc39439ad", 
+            "", 
+            9
+        ], 
+        "ancestor-vol-id": [
+            "ffa4faddf72d4a26bf3460101e91e7db", 
+            "Battle_test1", 
+            18
+        ], 
+        "vaai-tp-alerts": "disabled", 
+        "creation-time": "2014-11-13 14:25:04", 
+        "rd-bw": "0", 
+        "xms-id": [
+            "96aa1f6a6ca945a2816899241658f919", 
+            "xms", 
+            1
+        ], 
+        "compressible": "yes", 
+        "small-wr-bw": "0", 
+        "acc-num-of-unaligned-rd": "0", 
+        "lu-name": "", 
+        "unaligned-iops": "0", 
+        "unaligned-bw": "0", 
+        "bw": "0", 
+        "small-io-ratio-level": "ok", 
+        "lun-mapping-list": [], 
+        "vol-size": "104857600", 
+        "wr-iops": "0", 
+        "sys-id": [
+            "f557e37a2fb44af19f7e357ae42d5146", 
+            "Philly-xio", 
+            1
+        ], 
+        "avg-latency": "0", 
+        "rd-latency": "0", 
+        "small-wr-iops": "0", 
+        "small-bw": "0", 
+        "name": "Battle_test1_2014-11-13T14:25:04.daily.2", 
+        "acc-num-of-unaligned-wr": "0", 
+        "unaligned-wr-iops": "0", 
+        "acc-num-of-wr": "0", 
+        "small-io-ratio": "0", 
+        "acc-size-of-rd": "0", 
+        "unaligned-wr-bw": "0", 
+        "small-rd-iops": "0", 
+        "unaligned-io-ratio": "0", 
+        "rd-iops": "0", 
+        "wr-bw": "0"
+    }, 
+    "links": [
+        {
+            "href": "https://10.5.39.118/api/json/types/snapshots/19", 
+            "rel": "self"
+        }
+    ]
+}
+2014-11-20 16:57:24,161 - 637 -     INFO - Snap details successfully retrieved.
+2014-11-20 16:57:24,163 - 431 -     INFO - Parent Volume of Battle_test1_2014-11-13T14:25:04.daily.2 = Battle_test1
+2014-11-20 16:57:24,167 - 432 -     INFO - Snap was created on 2014-11-13 14:25:04
+2014-11-20 16:57:24,171 - 433 -     INFO - Snap is using 0.0 GB
+2014-11-20 16:57:24,173 - 445 -     INFO - No hosts mapped to Battle_test1_2014-11-13T14:25:04.daily.2, it will be deleted.
+2014-11-20 16:57:24,177 - 951 -    DEBUG - Starting SeleteSnap Module
+2014-11-20 16:57:24,177 - 953 -     INFO - Deleting Snapshot: Battle_test1_2014-11-13T14:25:04.daily.2
+2014-11-20 16:57:24,601 - 966 -     INFO - Delete Snap Status: <200>
+2014-11-20 16:57:24,601 - 967 -    DEBUG - 
+2014-11-20 16:57:24,601 - 424 -     INFO - 4: Battle_test1_2014-11-13T14:25:55.daily.1
+2014-11-20 16:57:24,605 - 621 -    DEBUG - Starting def_XMSGetSnapDetails module
+2014-11-20 16:57:24,838 - 635 -     INFO - Response code received from XMS for GetSnapDetails: <200>
+2014-11-20 16:57:24,841 - 636 -    DEBUG - {
+    "content": {
+        "unaligned-io-alerts": "disabled", 
+        "small-io-alerts": "disabled", 
+        "small-iops": "0", 
+        "dest-snap-list": [], 
+        "vol-id": [
+            "8a8d05415f654e50bd3c76621ad2c123", 
+            "Battle_test1_2014-11-13T14:25:55.daily.1", 
+            25
+        ], 
+        "obj-severity": "information", 
+        "num-of-lun-mappings": 0, 
+        "unaligned-rd-bw": "0", 
+        "num-of-dest-snaps": 0, 
+        "iops": "0", 
+        "acc-num-of-small-wr": "0", 
+        "alignment-offset": 0, 
+        "lb-size": 512, 
+        "logical-space-in-use": "0", 
+        "unaligned-io-ratio-level": "ok", 
+        "acc-num-of-rd": "0", 
+        "index": 25, 
+        "small-rd-bw": "0", 
+        "naa-name": "", 
+        "acc-size-of-wr": "0", 
+        "acc-num-of-small-rd": "0", 
+        "unaligned-rd-iops": "0", 
+        "wr-latency": "0", 
+        "snapgrp-id": [
+            "2efe14d415094f0c8ee2494bc39439ad", 
+            "", 
+            9
+        ], 
+        "ancestor-vol-id": [
+            "ffa4faddf72d4a26bf3460101e91e7db", 
+            "Battle_test1", 
+            18
+        ], 
+        "vaai-tp-alerts": "disabled", 
+        "creation-time": "2014-11-13 14:25:56", 
+        "rd-bw": "0", 
+        "xms-id": [
+            "96aa1f6a6ca945a2816899241658f919", 
+            "xms", 
+            1
+        ], 
+        "compressible": "yes", 
+        "small-wr-bw": "0", 
+        "acc-num-of-unaligned-rd": "0", 
+        "lu-name": "", 
+        "unaligned-iops": "0", 
+        "unaligned-bw": "0", 
+        "bw": "0", 
+        "small-io-ratio-level": "ok", 
+        "lun-mapping-list": [], 
+        "vol-size": "104857600", 
+        "wr-iops": "0", 
+        "sys-id": [
+            "f557e37a2fb44af19f7e357ae42d5146", 
+            "Philly-xio", 
+            1
+        ], 
+        "avg-latency": "0", 
+        "rd-latency": "0", 
+        "small-wr-iops": "0", 
+        "small-bw": "0", 
+        "name": "Battle_test1_2014-11-13T14:25:55.daily.1", 
+        "acc-num-of-unaligned-wr": "0", 
+        "unaligned-wr-iops": "0", 
+        "acc-num-of-wr": "0", 
+        "small-io-ratio": "0", 
+        "acc-size-of-rd": "0", 
+        "unaligned-wr-bw": "0", 
+        "small-rd-iops": "0", 
+        "unaligned-io-ratio": "0", 
+        "rd-iops": "0", 
+        "wr-bw": "0"
+    }, 
+    "links": [
+        {
+            "href": "https://10.5.39.118/api/json/types/snapshots/25", 
+            "rel": "self"
+        }
+    ]
+}
+2014-11-20 16:57:24,841 - 637 -     INFO - Snap details successfully retrieved.
+2014-11-20 16:57:24,842 - 431 -     INFO - Parent Volume of Battle_test1_2014-11-13T14:25:55.daily.1 = Battle_test1
+2014-11-20 16:57:24,844 - 432 -     INFO - Snap was created on 2014-11-13 14:25:56
+2014-11-20 16:57:24,848 - 433 -     INFO - Snap is using 0.0 GB
+2014-11-20 16:57:24,849 - 445 -     INFO - No hosts mapped to Battle_test1_2014-11-13T14:25:55.daily.1, it will be deleted.
+2014-11-20 16:57:24,861 - 951 -    DEBUG - Starting SeleteSnap Module
+2014-11-20 16:57:24,861 - 953 -     INFO - Deleting Snapshot: Battle_test1_2014-11-13T14:25:55.daily.1
+2014-11-20 16:57:25,190 - 966 -     INFO - Delete Snap Status: <200>
+2014-11-20 16:57:25,191 - 967 -    DEBUG - 
+2014-11-20 16:57:25,193 - 499 -     INFO - Complete!
