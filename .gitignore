@@ -1,4 +1,8 @@
-requirements.txt
+XtremIOSnap_old.zip
+XtremIOSnap_old_0.zip
+XtremIOSnap_old_1.zip
 setup.py
 modules/encoder.pyc
 *.pyc
+*.log
+requirements.txt
