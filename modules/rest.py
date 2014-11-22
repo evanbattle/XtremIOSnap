@@ -62,8 +62,8 @@ class Restful:
             rest_logger.debug('_get - Get Request Status: <'+str(resp.status_code)+'>')
             rest_logger.debug('_get - '+resp.text)
         else:
-            rest_logger.info('_get - Get Request Status: <'+str(resp.status_code)+'>')
-            rest_logger.info(resp.text)
+            rest_logger.error('_get - Get Request Status: <'+str(resp.status_code)+'>')
+            rest_logger.error(resp.text)
             sys.exit(1)
 
         return resp
@@ -90,8 +90,8 @@ class Restful:
             rest_logger.debug('_post - Post Request Status: <'+str(resp.status_code)+'>')
             rest_logger.debug(resp.text)
         else:
-            rest_logger.info('_post - Post Request Status: <'+str(resp.status_code)+'>')
-            rest_logger.info(resp.text)
+            rest_logger.critical('_post - Post Request Status: <'+str(resp.status_code)+'>')
+            rest_logger.critical(resp.text)
             sys.exit(1)
 
         return resp
@@ -118,8 +118,8 @@ class Restful:
             rest_logger.debug('_put - Put Request Status: <'+str(resp.status_code)+'>')
             rest_logger.debug(resp.text)
         else:
-            rest_logger.info('_put - Put Request Status: <'+str(resp.status_code)+'>')
-            rest_logger.info(resp.text)
+            rest_logger.critical('_put - Put Request Status: <'+str(resp.status_code)+'>')
+            rest_logger.critical(resp.text)
             sys.exit(1)
 
         return resp
@@ -142,8 +142,8 @@ class Restful:
             rest_logger.debug('_delete - Delete Request Status: <'+str(resp.status_code)+'>')
             rest_logger.debug(resp.text)
         else:
-            rest_logger.info('_delete - Delete Request Status: <'+str(resp.status_code)+'>')
-            rest_logger.info(resp.text)
+            rest_logger.critical('_delete - Delete Request Status: <'+str(resp.status_code)+'>')
+            rest_logger.critical(resp.text)
             sys.exit(1)
 
         return resp

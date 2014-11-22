@@ -6,9 +6,9 @@
 #              Sr. Systems Engineer, EMC
 #              evan.battle@emc.com
 #
-# Version:     3.0
+# Version:     3.1
 #
-# Created:     11/20/2014
+# Created:     11/22/2014
 #
 # Licence:     Open to distribute and modify.  This example code is unsupported
 #              by both EMC and the author.  IF YOU HAVE PROBLEMS WITH THIS
@@ -25,6 +25,7 @@
 ##%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 import inspect
 import logging
+import colorer
 
 def Logger(logfile,file_level,console_level=None):
 
@@ -36,7 +37,7 @@ def Logger(logfile,file_level,console_level=None):
         logger.handlers = []
 
     if console_level != None:
-        ch = logging.StreamHandler()
+        ch = colorer.ColorizingStreamHandler()
         ch.setLevel(console_level)
         ch_format = logging.Formatter('%(asctime)s - %(levelname)s - %(message)s')
         ch.setFormatter(ch_format)

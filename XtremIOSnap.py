@@ -7,9 +7,9 @@
 #              Sr. Systems Engineer, EMC
 #              evan.battle@emc.com
 #
-# Version:     3.0
+# Version:     3.1
 #
-# Created:     11/20/2014
+# Created:     11/22/2014
 #
 # Licence:     Open to distribute and modify.  This example code is unsupported
 #              by both EMC and the author.  IF YOU HAVE PROBLEMS WITH THIS
@@ -141,7 +141,7 @@ def main():
             cf_payload
             )
         if cf_resp.status_code == 201:
-            main_logger.info(
+            main_logger.warn(
                 'Created folder: '+main_options.snap_tgt_folder
                 )
     if options['--f'] ==True:
@@ -225,16 +225,16 @@ def main():
                         snap_creation_time = get_snap_details.json()['content']['creation-time']
                         snap_space_consumed = get_snap_details.json()['content']['logical-space-in-use']
                         arr_snap_lun_mapping = get_snap_details.json()['content']['lun-mapping-list']
-                        main_logger.info(
+                        main_logger.warn(
                             'Parent Volume of '+arr_vol_snap_list_component[x]+' = '+snap_parent_name
                             )
-                        main_logger.info(
+                        main_logger.warn(
                             'Snapshot: ' +arr_vol_snap_list_component[x]
                             )
-                        main_logger.info(
+                        main_logger.warn(
                             '       Snap was created on '+snap_creation_time
                             )
-                        main_logger.info(
+                        main_logger.warn(
                             '       Snap is using '+ str((float(snap_space_consumed)/1024)/1024)+' GB'
                             )
                         arr_lun_mapping_component = []
@@ -244,11 +244,11 @@ def main():
                                 arr_lun_mapping_component =str(arr_lun_mapping_component[1])
                                 arr_lun_mapping_component = arr_lun_mapping_component.replace('[u\'','')
                                 arr_lun_mapping_component = arr_lun_mapping_component.replace('\']','')
-                                main_logger.info(
+                                main_logger.critical(
                                     'Snapshot: '+arr_vol_snap_list_component[x]+' is currently mapped to '+arr_lun_mapping_component+', it will not be deleted.'
                                     )
                         else:
-                            main_logger.info(
+                            main_logger.warn(
                                 '       No hosts mapped to '+arr_vol_snap_list_component[x]+', it will be deleted.'
                                 )
                             delete_status = rest._delete(
@@ -323,16 +323,16 @@ def main():
                 snap_creation_time = get_snap_details.json()['content']['creation-time']
                 snap_space_consumed = get_snap_details.json()['content']['logical-space-in-use']
                 arr_snap_lun_mapping = get_snap_details.json()['content']['lun-mapping-list']
-                main_logger.info(
+                main_logger.warn(
                     'Parent Volume of '+arr_vol_snap_list_component[x]+' = '+snap_parent_name
                     )
-                main_logger.info(
+                main_logger.warn(
                     'Snapshot: '+arr_vol_snap_list_component[x]
                     )
-                main_logger.info(
+                main_logger.warn(
                     '       Snap was created on '+snap_creation_time
                     )
-                main_logger.info(
+                main_logger.warn(
                     '       Snap is using '+ str((float(snap_space_consumed)/1024)/1024)+' GB'
                     )
                 arr_lun_mapping_component = []
@@ -342,11 +342,11 @@ def main():
                         arr_lun_mapping_component =str(arr_lun_mapping_component[1])
                         arr_lun_mapping_component = arr_lun_mapping_component.replace('[u\'','')
                         arr_lun_mapping_component = arr_lun_mapping_component.replace('\']','')
-                        main_logger.info(
+                        main_logger.critical(
                             'Snapshot '+arr_vol_snap_list_component[x]+' is currently mapped to '+arr_lun_mapping_component+', it will not be deleted.'
                             )
                 else:
-                    main_logger.info(
+                    main_logger.warn(
                         '       No hosts mapped to '+arr_vol_snap_list_component[x]+', it will be deleted.'
                         )
                     delete_status = rest._delete(

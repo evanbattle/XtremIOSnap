@@ -73,7 +73,7 @@ class Options:
             self.schedule = 'weekly'
 
         else:
-            options_logger.error('No schedule, or incorrect option Specified.  Exiting...')
+            options_logger.critical('No schedule, or incorrect option Specified.  Exiting...')
             sys.exit(1)
 
         SnapFolder = '_Snapshots'
