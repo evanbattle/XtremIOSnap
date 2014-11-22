@@ -27,24 +27,28 @@ requests.packages.urllib3.disable_warnings()
 
 class Restful:
 
-    def __init__(self,logfile,global_XMS_IP,global_XMS_USER,global_XMS_PASS):
+    def __init__(self,logfile,debugmode,global_XMS_IP,global_XMS_USER,global_XMS_PASS):
 
         global rest_logger
         global XMS_IP
         global XMS_USERID
         global XMS_PASS
-        rest_logger = Logger(logfile,logging.DEBUG,logging.INFO)
-        rest_logger.debug('Loading Encode Module')
+        if debugmode == True:
+            rest_logger = Logger(logfile,logging.DEBUG,logging.INFO)
+        else:
+            rest_logger = Logger(logfile,logging.INFO,logging.INFO)
+
+        rest_logger.debug('Loading Restful Module')
         XMS_IP = global_XMS_IP
         XMS_USERID = global_XMS_USER
         XMS_PASS = global_XMS_PASS
 
 
     def _get(self,XMS_URL):
-        rest_logger.debug('Starting rest_get module')
+        rest_logger.debug('Starting _get module')
 
         try:
-            rest_logger.debug('https://'+XMS_IP+XMS_URL)
+            rest_logger.debug('_get - https://'+XMS_IP+XMS_URL)
             resp = requests.get(
                 'https://'+XMS_IP+XMS_URL,
                 auth=HTTPBasicAuth(XMS_USERID,XMS_PASS),
@@ -55,22 +59,23 @@ class Restful:
             sys.exit(1)
 
         if resp.status_code == 200:
-            rest_logger.debug('Get Request Status: <'+str(resp.status_code)+'>')
-            rest_logger.debug(resp.text)
+            rest_logger.debug('_get - Get Request Status: <'+str(resp.status_code)+'>')
+            rest_logger.debug('_get - '+resp.text)
         else:
-            rest_logger.info('Get Request Status: <'+str(resp.status_code)+'>')
+            rest_logger.info('_get - Get Request Status: <'+str(resp.status_code)+'>')
             rest_logger.info(resp.text)
             sys.exit(1)
 
         return resp
 
     def _post(self,XMS_URL,PAYLOAD):
-        rest_logger.debug('Starting rest_get module')
+        rest_logger.debug('Starting _post module')
 
         j=json.loads(PAYLOAD)
 
         try:
-            rest_logger.debug('https://'+XMS_IP+XMS_URL)
+            rest_logger.debug('_post - https://'+XMS_IP+XMS_URL)
+            rest_logger.debug('_post - '+PAYLOAD)
             resp = requests.post(
                 'https://'+XMS_IP+XMS_URL,
                 auth=HTTPBasicAuth(XMS_USERID,XMS_PASS),
@@ -82,22 +87,23 @@ class Restful:
             sys.exit(1)
 
         if resp.status_code == 201:
-            rest_logger.debug('Post Request Status: <'+str(resp.status_code)+'>')
+            rest_logger.debug('_post - Post Request Status: <'+str(resp.status_code)+'>')
             rest_logger.debug(resp.text)
         else:
-            rest_logger.info('Post Request Status: <'+str(resp.status_code)+'>')
+            rest_logger.info('_post - Post Request Status: <'+str(resp.status_code)+'>')
             rest_logger.info(resp.text)
             sys.exit(1)
 
         return resp
 
     def _put(self,XMS_URL,PAYLOAD):
-        rest_logger.debug('Starting rest_get module')
+        rest_logger.debug('Starting _put module')
 
         j=json.loads(PAYLOAD)
 
         try:
-            rest_logger.debug('https://'+XMS_IP+XMS_URL)
+            rest_logger.debug('_put - https://'+XMS_IP+XMS_URL)
+            rest_logger.debug('_put - '+PAYLOAD)
             resp = requests.put(
                 'https://'+XMS_IP+XMS_URL,
                 auth=HTTPBasicAuth(XMS_USERID,XMS_PASS),
@@ -109,20 +115,20 @@ class Restful:
             sys.exit(1)
 
         if resp.status_code == 200:
-            rest_logger.debug('Put Request Status: <'+str(resp.status_code)+'>')
+            rest_logger.debug('_put - Put Request Status: <'+str(resp.status_code)+'>')
             rest_logger.debug(resp.text)
         else:
-            rest_logger.info('Put Request Status: <'+str(resp.status_code)+'>')
+            rest_logger.info('_put - Put Request Status: <'+str(resp.status_code)+'>')
             rest_logger.info(resp.text)
             sys.exit(1)
 
         return resp
 
     def _delete(self,XMS_URL):
-        rest_logger.debug('Starting rest_get module')
+        rest_logger.debug('Starting _delete module')
 
         try:
-            rest_logger.debug('https://'+XMS_IP+XMS_URL)
+            rest_logger.debug('_delete - https://'+XMS_IP+XMS_URL)
             resp = requests.delete(
                 'https://'+XMS_IP+XMS_URL,
                 auth=HTTPBasicAuth(XMS_USERID,XMS_PASS),
@@ -133,10 +139,10 @@ class Restful:
             sys.exit(1)
 
         if resp.status_code == 200:
-            rest_logger.debug('Delete Request Status: <'+str(resp.status_code)+'>')
+            rest_logger.debug('_delete - Delete Request Status: <'+str(resp.status_code)+'>')
             rest_logger.debug(resp.text)
         else:
-            rest_logger.info('Delete Request Status: <'+str(resp.status_code)+'>')
+            rest_logger.info('_delete - Delete Request Status: <'+str(resp.status_code)+'>')
             rest_logger.info(resp.text)
             sys.exit(1)
 

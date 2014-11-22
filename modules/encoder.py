@@ -25,10 +25,13 @@ from modules.logger import Logger
 
 class Encode:
 
-    def __init__(self,logfile):
+    def __init__(self,logfile,debugmode):
 
         global encode_logger
-        encode_logger = Logger(logfile,logging.DEBUG,logging.INFO)
+        if debugmode == True:
+            encode_logger = Logger(logfile,logging.DEBUG,logging.INFO)
+        else:
+            encode_logger = Logger(logfile,logging.INFO,logging.INFO)
         encode_logger.debug('Loading Encode Module')
 
     def _encodeuser(self,user):

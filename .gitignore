@@ -5,3 +5,4 @@ setup.py
 modules/encoder.pyc
 *.pyc
 *.log
+requirements.txt

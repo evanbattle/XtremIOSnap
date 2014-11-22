@@ -27,14 +27,18 @@ class Options:
     def __init__(self,logfile,options):
 
         global options_logger
-        options_logger = Logger(logfile,logging.DEBUG,logging.INFO)
+        if options['--debug'] == True:
+            options_logger = Logger(logfile,logging.DEBUG,logging.INFO)
+        else:
+            options_logger = Logger(logfile,logging.INFO,logging.INFO)
+
         options_logger.debug('Loading Options Module')
-        encoder = Encode(options['--l'])
+        encoder = Encode(options['--l'],options['--debug'])
 
         if options['--encode'] is True:
             options_logger.info('Encoding user id and password')
-            encode_user = encoder._encodeuser(options['--user'])
-            encode_pass = encoder._encodepass(options['--pass'])
+            encode_user = encoder._encodeuser(options['XMS_USER'])
+            encode_pass = encoder._encodepass(options['XMS_PASS'])
             print ''
             print 'Encoded User ID = ' + encode_user
             print 'Encoded Password = ' + encode_pass
@@ -45,13 +49,13 @@ class Options:
 
         elif options['--e']:
             options_logger.debug('Using an encoded username and password')
-            XMS_USER = encoder._decodeuser(options['--user'])
-            XMS_PASS = encoder._decodepass(options['--pass'])
+            XMS_USER = encoder._decodeuser(options['XMS_USER'])
+            XMS_PASS = encoder._decodepass(options['XMS_PASS'])
 
         else:
             options_logger.debug('Username and password are not encoded')
-            XMS_USER = options['--user']
-            XMS_PASS = options['--pass']
+            XMS_USER = options['XMS_USER']
+            XMS_PASS = options['XMS_PASS']
 
         self.XMS_USER = XMS_USER
         self.XMS_PASS = XMS_PASS
@@ -69,18 +73,21 @@ class Options:
             self.schedule = 'weekly'
 
         else:
-            options_logger.error('No Schedule Specified.  Exiting...')
+            options_logger.error('No schedule, or incorrect option Specified.  Exiting...')
             sys.exit(1)
 
         SnapFolder = '_Snapshots'
 
-        self.var_snap_tgt_folder = options['--targetfolder'] ## this should be an optional variable, if the customer wants to organize snapshots under a folder hierarchy
+        self.var_snap_tgt_folder = options['--tf'] ## this should be an optional variable, if the customer wants to organize snapshots under a folder hierarchy
 
         if self.var_snap_tgt_folder == None:
+            options_logger.debug('No snapshot target folder specified')
             self.var_snap_tgt_folder =''
             self.snap_tgt_folder = SnapFolder
+            options_logger.debug('Using '+self.snap_tgt_folder+' as the snapshot target')
         else:
             self.snap_tgt_folder = self.var_snap_tgt_folder+'/'+SnapFolder
+            options_logger.debug('Using '+self.snap_tgt_folder+' as the snapshot target')
 
 ##%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 ##  exit_gracefully
