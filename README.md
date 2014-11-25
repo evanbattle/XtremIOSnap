@@ -89,7 +89,10 @@ Options
 Running XtremIOSnap
 ----------- 
    XtremIOSnap includes the ability to encode the username and password for use in scripts and task schedulers so that the plain text username and password does not need to be stored in clear text.
+   
       XtremIOSnap --encode admin Xtrem10
+      
+![alt tag](https://github.com/evanbattle/XtremIOSnap/blob/master/images/encode.png)
    
 
 Contributing
