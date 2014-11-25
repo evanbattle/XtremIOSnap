@@ -1,13 +1,6 @@
 XtremIOSnap
-===========
+-----------
    ------------------------------------------------------------------------
-   XTREMIOSNAP
-   
-   This example code is unsupported by both EMC and the author.
-   IF YOU HAVE PROBLEMS WITH THIS SOFTWARE, THERE IS NO ONE PROVIDING TECHNICAL SUPPORT FOR RESOLVING ISSUES. USE CODE AS IS!
-    
-   THIS GITHUB REPOSITORY IS NOT AFFILIATED WITH EMC CORPORATION.
-
    Version 3.0
     
    Create and maintain snapshots on an XtremIO array utilizing the REST API interface.  Designed and tested for v3.0.
@@ -79,3 +72,17 @@ Options:
 
    The --f= switch is optional, if not specified, all snapshots will be placed into the /_Snapshots folder.  This is not really necessary for anything other than aesthetics.  You can select the "Show as Snapshot Hierarchy" to view snaps with their source LUN.
 
+Contributing
+-----------
+Please contribute in any way to the project.  Specifically, normalizing differnet image sizes, locations, and intance types would be easy adds to enhance the usefulness of the project.
+
+
+Licensing
+---------
+Licensed under the Apache License, Version 2.0 (the “License”); you may not use this file except in compliance with the License. You may obtain a copy of the License at <http://www.apache.org/licenses/LICENSE-2.0>
+
+Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an “AS IS” BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the License for the specific language governing permissions and limitations under the License.
+
+Support
+-------
+Please file bugs and issues at the Github issues page. For more general discussions you can contact the EMC Code team at <a href="https://groups.google.com/forum/#!forum/emccode-users">Google Groups</a>. The code and documentation are released with no warranties or SLAs and are intended to be supported through a community driven process.
