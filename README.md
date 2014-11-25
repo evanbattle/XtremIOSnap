@@ -110,6 +110,18 @@ Running XtremIOSnap
 
 ![alt tag](https://github.com/evanbattle/XtremIOSnap/blob/master/images/volsnap_with_delete.png)
 
+Showing the snapshot folder under an existing folder:
+
+![alt tag](https://github.com/evanbattle/XtremIOSnap/blob/master/images/XMS_Folder.png)
+
+Showing a set of 5, hourly, snapshots:
+
+![alt tag](https://github.com/evanbattle/XtremIOSnap/blob/master/images/XMS_hourly_snaps.png)
+
+Showing the snapshot hierarchy view with a mix of individual volume snaps and folder snaps:
+
+![alt tag](https://github.com/evanbattle/XtremIOSnap/blob/master/images/XMS_Snapshot_Hierarchy.png)
+
 Contributing
 -----------
 Please contribute in any way to the project.  Specifically, normalizing differnet image sizes, locations, and intance types would be easy adds to enhance the usefulness of the project.
