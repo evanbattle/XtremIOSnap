@@ -94,6 +94,21 @@ Running XtremIOSnap
       
 ![alt tag](https://github.com/evanbattle/XtremIOSnap/blob/master/images/encode.png)
    
+      XtremIOSnap <XMS_IP_Address> <Encoded_Username> <Encoded_Password> --e --f --snap=<folder_to_snap> --n=<num_snaps> --schedule=<hourly/daily/weekly> --tf=<target_folder>
+      
+![alt tag](https://github.com/evanbattle/XtremIOSnap/blob/master/images/folder_snap.png)
+
+      XtremIOSnap <XMS_IP_Address> <Encoded_Username> <Encoded_Password> --e --f --snap=<folder_to_snap> --n=<num_snaps> --schedule=<hourly/daily/weekly> --tf=<target_folder>
+      
+![alt tag](https://github.com/evanbattle/XtremIOSnap/blob/master/images/folder_snap_with_delete.png)
+
+      XtremIOSnap <XMS_IP_Address> <Encoded_Username> <Encoded_Password> --e --v --snap=<volume_to_snap> --n=<num_snaps> --schedule=<hourly/daily/weekly> --tf=<target_folder>
+      
+![alt tag](https://github.com/evanbattle/XtremIOSnap/blob/master/images/vol_snap.png)
+
+      XtremIOSnap <XMS_IP_Address> <Encoded_Username> <Encoded_Password> --e --v --snap=<volume_to_snap> --n=<num_snaps> --schedule=<hourly/daily/weekly> --tf=<target_folder>
+
+![alt tag](https://github.com/evanbattle/XtremIOSnap/blob/master/images/volsnap_with_delete.png)
 
 Contributing
 -----------
