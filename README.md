@@ -16,7 +16,6 @@ As a stop-gap, XtremIOSnap has been designed to bridge the gap that exists in th
 Install
 -------
    Create and maintain snapshots on an XtremIO array utilizing the REST API interface.  Designed and tested for v3.0.
-   Visual C++ 2008 Redistributable package from MS (http://www.microsoft.com/en-us/download/details.aspx?id=29 ) is required for the compiled Windows executable.
    
    If you are running this in python, it was written against Python 2.7.8 and will require the requests (2.4.3 or newer) package and the docopt package to be installed using:
    
@@ -25,6 +24,8 @@ Install
       pip install docopt
     
    The script has been tested back to python 2.6 on both Linux (Ubuntu 14.04) and Mac OSX Mavericks.
+   
+   If you are running in Windows without Python, use the compiled executable XtremIOSnap.exe.  Visual C++ 2008 Redistributable package from MS (http://www.microsoft.com/en-us/download/details.aspx?id=29 ) is required for the compiled Windows executable.
 <br>
 Usage
 -------   
@@ -33,8 +34,6 @@ Usage
       XtremIOSnap (--encode) XMS_USER XMS_PASS [--l=<log_path>] [--debug]
       XtremIOSnap XMS_IP XMS_USER XMS_PASS [--e]  [(--f --snap=<object_to_snap>)] [--n=<number_of_snaps>] [--schedule=<schedule>] [--tf=<target_folder>] [--l=<log_path>] [--debug]
       XtremIOSnap XMS_IP XMS_USER XMS_PASS [--e]  [(--v --snap=<object_to_snap>)] [--n=<number_of_snaps>] [--schedule=<schedule>] [--tf=<target_folder>] [--l=<log_path>] [--debug]
-
-   Create and maintain snapshots of both volumes and folders on an XtremIO array utilizing the REST API interface.  Designed and tested for XtremIO v3.0+.
 
 Arguments
 ---------
@@ -86,6 +85,12 @@ Options
    If the --n= option is not used, the script will maintain a maximum of 5 snapshots, deleting snaps on a FIFO basis, depending on the --schedule=hourly/daily/weekly option.
 
    The --f= switch is optional, if not specified, all snapshots will be placed into the /_Snapshots folder.  This is not really necessary for anything other than aesthetics.  You can select the "Show as Snapshot Hierarchy" to view snaps with their source LUN.
+  
+Running XtremIOSnap
+----------- 
+   XtremIOSnap includes the ability to encode the username and password for use in scripts and task schedulers so that the plain text username and password does not need to be stored in clear text.
+      XtremIOSnap --encode admin Xtrem10
+   
 
 Contributing
 -----------
