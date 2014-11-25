@@ -2,7 +2,19 @@ XtremIOSnap
 ===========
    ------------------------------------------------------------------------
    Version 3.0
-    
+   
+Summary
+-------
+
+Snapshots can provide a number of benefits, from being used as backups in the event a recovery is needed at some point in the future, to making copies of production datasets available for non-production use (test/dev, reporting, etc).  Historically, snapshot use has been limited due to performance constraints introduced by COFW mechanisms or limitations on the underlying block filesystem (redirect on write).  
+
+With XtremIO, snapshots can be easilly created and mapped to hosts to create full-performance, space-efficient, writeable copies of production data for a variety of uses without the legacy caveats that have become commonplace with legacy storage arrays.  However, in the current version, 3.0, a built in snapshot scheduler does not exist, making it challenging to automate snapshots for operational uses.
+
+As a stop-gap, XtremIOSnap has been designed to bridge the gap that exists in the scheduling of snapshots until a scheduler is included in XMS. Additionlly, XtremIOSnap provides a working example of using the XtremIO REST API to interact and perform actions on the XtremIO array.
+
+<br> 
+Install
+-------
    Create and maintain snapshots on an XtremIO array utilizing the REST API interface.  Designed and tested for v3.0.
    Visual C++ 2008 Redistributable package from MS (http://www.microsoft.com/en-us/download/details.aspx?id=29 ) is required for the compiled Windows executable.
    
@@ -13,8 +25,9 @@ XtremIOSnap
       pip install docopt
     
    The script has been tested back to python 2.6 on both Linux (Ubuntu 14.04) and Mac OSX Mavericks.
-   
-   Usage:
+<br>
+Usage
+-------   
       
       XtremIOSnap -h | --help
       XtremIOSnap (--encode) XMS_USER XMS_PASS [--l=<log_path>] [--debug]
@@ -23,13 +36,15 @@ XtremIOSnap
 
    Create and maintain snapshots of both volumes and folders on an XtremIO array utilizing the REST API interface.  Designed and tested for XtremIO v3.0+.
 
-Arguments:
+Arguments
+---------
 
       XMS_IP                  IP or Hostname of XMS (required)
       XMS_USER                Username for XMS
       XMS_PASS                Password for XMS
 
-Options:
+Options
+-------
 
       -h --help               Show this help screen
 
